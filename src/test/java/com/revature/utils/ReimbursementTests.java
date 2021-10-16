@@ -35,6 +35,7 @@ public class ReimbursementTests {
         String username = "mjordan";
         String password = "Password";
         String userRole = "admin";
+        log.info("Setting up variables for testing");
     }
 
     @BeforeAll
