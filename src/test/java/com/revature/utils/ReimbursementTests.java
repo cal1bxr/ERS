@@ -42,6 +42,9 @@ public class ReimbursementTests {
     public void setTestReimbursement(){}
 
     @Test
+    public void testAddUser(){}
+
+    @Test
     public void testLogin(){}
 
     @Test

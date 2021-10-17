@@ -1,0 +1,5 @@
+INSERT INTO ers_users (ers_users_id, ers_username, ers_password, user_first_name, user_last_name, user_email, user_role_id) VALUES (2, 'johnnytest', 'password2', 'Johnny', 'Test', 'johnnyTest@someemail.com', 2);
+INSERT INTO ers_users_roles (ers_user_role_id, user_role) VALUE (2, 'Employee');
+INSERT INTO ers_reimbursement_status (reimb_status_id, reimb_status) VALUES (2, 'Rejected');
+INSERT INTO ers_reimbursement (reimb_id, reimb_amount, reimb_submitted, reimb_resolved, reimb_description, reimb_receipt, reimb_author, reimb_resolver, reimb_status_id, reimb_type_id) VALUES (2, 120, '2020-10-15 01:00:04-4', '2020-10-15 01:23:04-4', 'Hotel', NULL, 1, 1, 2, 1);
+INSERT INTO ers_reimbursement_type (reimb_type_id, reimb_type) VALUES (2, 'Comp Time');
