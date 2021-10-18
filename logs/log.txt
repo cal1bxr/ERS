@@ -4,3 +4,6 @@
 16:59:25.126 [] [main] INFO  c.revature.utils.ReimbursementTests - in test addUser
 16:59:43.965 [] [main] INFO  c.revature.utils.ReimbursementTests - Setting up variables for testing
 16:59:43.977 [] [main] INFO  c.revature.utils.ReimbursementTests - in test addUser
+23:09:31.958 [] [main] INFO  c.revature.utils.ReimbursementTests - Setting up variables for testing
+23:09:31.969 [] [main] INFO  c.revature.utils.ReimbursementTests - in test addUser
+23:09:32.832 [] [main] INFO  c.revature.utils.ReimbursementTests - in test view all tickets

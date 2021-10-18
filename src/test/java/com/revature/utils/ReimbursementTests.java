@@ -1,9 +1,11 @@
 package com.revature.utils;
 
 
+import com.revature.controllers.ReimbursementController;
 import com.revature.daos.EmployeeDAOIMPL;
 import com.revature.daos.ReimbursementDAOImpl;
 import com.revature.models.Employee;
+import com.revature.models.Reimbursement;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
@@ -13,12 +15,14 @@ import org.slf4j.LoggerFactory;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class ReimbursementTests {
     public static ReimbursementDAOImpl reimbursementDAOimpl;
     public static EmployeeDAOIMPL employeeDAO;
+    public static ReimbursementController reimbControl;
     public static Employee employee;
     public static Logger log = LoggerFactory.getLogger(ReimbursementTests.class);
     public static String username;
@@ -41,6 +45,7 @@ public class ReimbursementTests {
     @BeforeAll
     public static void setReimbursementDAOImpl(){
         reimbursementDAOimpl = new ReimbursementDAOImpl();
+        reimbControl = new ReimbursementController();
     }
     public static void setEmployeeDAOIMPL() {employeeDAO = new EmployeeDAOIMPL();}
     public static void setEmployee() {employee = new Employee(userID, username, password, userFirstName, userLastName, userEmail, userRoleID, userRole);
@@ -81,9 +86,12 @@ public class ReimbursementTests {
 //    @Test
 //    public void testSubmitReimbursement(){}
 //
-//    @Test
-//    public void testViewAllReimbursement(){}
-//
+    @Test
+    public void testViewAllReimbursement(){
+        log.info("in test view all tickets");
+        reimbControl.displayAllTickets();
+    }
+
 //    @Test
 //    public void testReimbursementApproval(){}
 //
