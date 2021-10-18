@@ -1,0 +1,6 @@
+10:40:08.542 [] [main] INFO  c.revature.utils.ReimbursementTests - Setting up variables for testing
+10:40:08.553 [] [main] INFO  c.revature.utils.ReimbursementTests - in test addUser
+16:59:25.114 [] [main] INFO  c.revature.utils.ReimbursementTests - Setting up variables for testing
+16:59:25.126 [] [main] INFO  c.revature.utils.ReimbursementTests - in test addUser
+16:59:43.965 [] [main] INFO  c.revature.utils.ReimbursementTests - Setting up variables for testing
+16:59:43.977 [] [main] INFO  c.revature.utils.ReimbursementTests - in test addUser

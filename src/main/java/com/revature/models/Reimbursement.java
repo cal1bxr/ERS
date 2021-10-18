@@ -1,5 +1,7 @@
 package com.revature.models;
 
+import java.sql.Time;
+
 public class Reimbursement {
     private int reimbID;
     private float reimbAmount;
@@ -10,8 +12,10 @@ public class Reimbursement {
     private int reimbTypeID;
     private String reimbStatus;
     private String reimbType;
+    private Time reimbSubmitted;
+    private Time reimbResovled
 
-    public Reimbursement(int reimbID, float reimbAmount, String reimbDescription, int reimbAuthor, int reimbResolver, int reimbStatusID, int reimbTypeID, String reimbStatus, String reimbType) {
+    public Reimbursement(int reimbID, float reimbAmount, String reimbDescription, int reimbAuthor, int reimbResolver, int reimbStatusID, int reimbTypeID, String reimbStatus, String reimbType, Time reimbSubmitted, Time reimbResovled) {
         this.reimbID = reimbID;
         this.reimbAmount = reimbAmount;
         this.reimbDescription = reimbDescription;
@@ -21,46 +25,12 @@ public class Reimbursement {
         this.reimbTypeID = reimbTypeID;
         this.reimbStatus = reimbStatus;
         this.reimbType = reimbType;
+        this.reimbSubmitted = reimbSubmitted;
+        this.reimbResovled = reimbResovled;
     }
 
-    public int getReimbID() {
-        return reimbID;
-    }
-
-    public void setReimbID(int reimbID) {
+    public Reimbursement(int reimbID) {
         this.reimbID = reimbID;
-    }
-
-    public float getReimbAmount() {
-        return reimbAmount;
-    }
-
-    public void setReimbAmount(float reimbAmount) {
-        this.reimbAmount = reimbAmount;
-    }
-
-    public String getReimbDescription() {
-        return reimbDescription;
-    }
-
-    public void setReimbDescription(String reimbDescription) {
-        this.reimbDescription = reimbDescription;
-    }
-
-    public int getReimbAuthor() {
-        return reimbAuthor;
-    }
-
-    public void setReimbAuthor(int reimbAuthor) {
-        this.reimbAuthor = reimbAuthor;
-    }
-
-    public int getReimbResolver() {
-        return reimbResolver;
-    }
-
-    public void setReimbResolver(int reimbResolver) {
-        this.reimbResolver = reimbResolver;
     }
 
     public int getReimbStatusID() {
