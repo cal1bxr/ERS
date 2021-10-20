@@ -6,10 +6,11 @@ import java.util.List;
 
 public interface ErsUsersDAO {
     public List<ErsUsers> getAllUsers();
-    public boolean userLogin();
-    public String addUserName();
-    public String addFirstName();
-    public String addLastName();
-    public String addUserEmail();
-    public String createPassword();
+    public ErsUsers getUser(int ersUsersId);
+    public boolean userLogin(String ersUsername, String ersPassword);
+    public void insert(ErsUsers user);
+    public void update(ErsUsers user);
+    public void delete(ErsUsers user);
+
+    
 }

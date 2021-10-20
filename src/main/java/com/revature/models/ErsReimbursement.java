@@ -7,7 +7,7 @@ import java.util.Objects;
 
 @Entity
 @Table(name="ers_reimbursement")
-public class ErsReimbursment {
+public class ErsReimbursement {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="reimb_id")
@@ -29,7 +29,7 @@ public class ErsReimbursment {
     @Column(name="reimb_type_id", nullable = false)
     private int reimb_type_id;
 
-    public ErsReimbursment(int reimbId, double reimbAmount,
+    public ErsReimbursement(int reimbId, double reimbAmount,
                            Timestamp reimSubmitted, Timestamp reimbResolved, byte[] reimbReceipt, int reimbAuthor, int reimbResolver, int reimbStatusId, int reimb_type_id) {
         this.reimbId = reimbId;
         this.reimbAmount = reimbAmount;
@@ -42,7 +42,7 @@ public class ErsReimbursment {
         this.reimb_type_id = reimb_type_id;
     }
 
-    public ErsReimbursment(double reimbAmount, Timestamp reimSubmitted,
+    public ErsReimbursement(double reimbAmount, Timestamp reimSubmitted,
                            Timestamp reimbResolved, byte[] reimbReceipt, int reimbAuthor, int reimbResolver, int reimbStatusId, int reimb_type_id) {
         this.reimbAmount = reimbAmount;
         this.reimSubmitted = reimSubmitted;
@@ -54,7 +54,7 @@ public class ErsReimbursment {
         this.reimb_type_id = reimb_type_id;
     }
 
-    public ErsReimbursment() {
+    public ErsReimbursement() {
     }
 
     public int getReimbId() {
@@ -133,7 +133,7 @@ public class ErsReimbursment {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        ErsReimbursment that = (ErsReimbursment) o;
+        ErsReimbursement that = (ErsReimbursement) o;
         return reimbId == that.reimbId && reimbAmount == that.reimbAmount && reimbAuthor == that.reimbAuthor && reimbResolver == that.reimbResolver && reimbStatusId == that.reimbStatusId && reimb_type_id == that.reimb_type_id && Objects.equals(reimSubmitted, that.reimSubmitted) && Objects.equals(reimbResolved, that.reimbResolved) && Arrays.equals(reimbReceipt, that.reimbReceipt);
     }
 

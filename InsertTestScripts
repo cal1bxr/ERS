@@ -5,3 +5,5 @@ INSERT INTO ers_reimbursement (reimb_id, reimb_amount, reimb_submitted, reimb_re
 INSERT INTO ers_reimbursement_type (reimb_type_id, reimb_type) VALUES (4, 'OTHER');
 
 SELECT * FROM ers_reimbursement WHERE reimb_id = 1;
+
+CREATE SCHEMA ers_reimbursement;
