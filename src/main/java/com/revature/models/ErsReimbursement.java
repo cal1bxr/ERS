@@ -12,23 +12,40 @@ public class ErsReimbursement {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="reimb_id")
     private int reimbId;
+   
     @Column(name="reimb_amount", nullable = false)
     private double reimbAmount;
+    
     @Column(name="reimb_submitted")
     private Timestamp reimSubmitted;
+    
     @Column(name="reimb_resolved")
     private Timestamp reimbResolved;
+    
     @Column(name="reimb_receipt")
     private byte[] reimbReceipt;
+    
     @Column(name="reimb_author", nullable = false)
+    @ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
+    @JoinColumn(name="ers_users_id")
     private int reimbAuthor;
+    
     @Column(name="reimb_resolver", nullable = false)
+    @ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
+    @JoinColumn(name="ers_users_id")
     private int reimbResolver;
+    
     @Column(name="reimb_status_id", nullable = false)
+    @ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
+    @JoinColumn(name="ers_users_id")
     private int reimbStatusId;
+    
     @Column(name="reimb_type_id", nullable = false)
+    @ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
+    @JoinColumn(name="ers_users_id")
     private int reimb_type_id;
 
+   
     public ErsReimbursement(int reimbId, double reimbAmount,
                            Timestamp reimSubmitted, Timestamp reimbResolved, byte[] reimbReceipt, int reimbAuthor, int reimbResolver, int reimbStatusId, int reimb_type_id) {
         this.reimbId = reimbId;

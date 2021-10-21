@@ -7,9 +7,9 @@ import java.util.Objects;
 @Table(name="ers_user_roles")
 public class ErsUserRoles {
     @Id
-//    @OneToMany(mappedBy="ers_user_roles", fetch=FetchType.EAGER)
-    @Column(name="user_role_id")
+    @Column(name="ers_role_id")
     private int userRoleId;
+    
     @Column(length = 10, name="user_role", nullable = false)
     private String userRole;
 

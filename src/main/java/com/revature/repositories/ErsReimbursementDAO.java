@@ -8,13 +8,13 @@ import java.util.HashMap;
 import java.util.List;
 
 public interface ErsReimbursementDAO {
-    public void addReimbursement(ErsReimbursement reimb);
-    public int viewPendingReimbursement();
+    public boolean addReimbursement(ErsReimbursement reimb);
+    public ErsReimbursement viewPastReimbursement(int ersUsersId);
     public List<ErsReimbursement> viewAllTickets();
-    public boolean approveDenyReimb();
-    public Timestamp submitReimb();
-    public Timestamp resolveReimb();
-    public String describeReimb();
+    public boolean updateReimb(ErsReimbursement reimb);
+//    public Timestamp submitReimb();
+//    public Timestamp resolveReimb();
+    public boolean describeReimb(ErsReimbursement reimb);
     public byte[] uploadReceipt();
-    public HashMap<Integer, Integer> filterReimb();
+    public ErsReimbursement filterReimb(int reimbStatusId);
 }

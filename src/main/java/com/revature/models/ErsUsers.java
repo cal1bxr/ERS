@@ -1,8 +1,12 @@
 package com.revature.models;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import java.util.Objects;
 
@@ -23,6 +27,8 @@ public class ErsUsers {
     @Column(length=150, name="user_email", nullable = false, unique = true)
     private String userEmail;
     @Column(name="user_role_id", nullable = false)
+    @ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
+    @JoinColumn(name="ers_role_id")
     private int userRoleId;
 
     public ErsUsers(int ersUsersId, String ersUsername, String ersPassword, String userFirstName, String userLastName, String userEmail, int userRoleId) {
