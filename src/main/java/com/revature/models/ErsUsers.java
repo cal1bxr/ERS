@@ -14,21 +14,13 @@ import java.util.Objects;
 @Table(name="ers_users")
 public class ErsUsers {
     @Id
-    @Column(name="ers_users_id")
     private int ersUsersId;
-    @Column(length=50, name="ers_username", nullable = false, unique = true)
     private String ersUsername;
-    @Column(length=50, name="ers_password", nullable = false)
     private String ersPassword;
-    @Column(length=100, name="ers_first_name", nullable = false)
     private String userFirstName;
-    @Column(length=100, name="ers_last_name", nullable = false)
     private String userLastName;
-    @Column(length=150, name="user_email", nullable = false, unique = true)
     private String userEmail;
-    @Column(name="user_role_id", nullable = false)
     @ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
-    @JoinColumn(name="ers_role_id")
     private int userRoleId;
 
     public ErsUsers(int ersUsersId, String ersUsername, String ersPassword, String userFirstName, String userLastName, String userEmail, int userRoleId) {

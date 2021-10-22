@@ -10,9 +10,7 @@ import java.util.Objects;
 @Table(name="ers_reimbursment_type")
 public class ErsReimbursementType {
     @Id
-    @Column(name="reimb_type_id")
     private int reimbTypeId;
-    @Column(length=10, name="reimb_type", nullable = false)
     private String reimbType;
 
     public ErsReimbursementType(int reimbTypeId, String reimbType) {

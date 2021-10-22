@@ -26,45 +26,11 @@ public class ErsUsersDaoImpl implements ErsUsersDAO {
 	};
 
 	@Override
-	public boolean userLogin(String ersUsername, String ersPassword) {
-		try {
-			Session session = HibernateUtil.getSession();
-			ErsUsers user = session.get(ErsUsers.class, ersUsername);
-			ErsUsers pass = session.get(ErsUsers.class, ersPassword);
-			String username = user.getErsUsername();
-			String password = user.getErsPassword();
-			HibernateUtil.closeSession();
-			if ((ersUsername.equals(username) && (ersPassword.equals(password)))) {
-				return true;
-			} 
-			log.info("Login succesful");
-			return true;
-		} catch (HibernateException e) {
-			log.warn("Username not in database");
-			e.printStackTrace();
-			return false;
+	public ErsUsers getByUsername(String username) {
+		ErsUsers ersUser = new ErsUsers();
+		if(username.equals(ersUser.getErsUsername())){
+			return ersUser;
 		}
+		return null;
 	}
-
-//	@Override
-//	public void insert(ErsUsers user) {
-//		Session session = HibernateUtil.getSession();
-//		session.save(user);
-//		HibernateUtil.closeSession();
-//	}
-//
-//	@Override
-//	public void update(ErsUsers user) {
-//		Session session = HibernateUtil.getSession();
-//		session.merge(user);
-//		HibernateUtil.closeSession();		
-//	}
-//
-//	@Override
-//	public void delete(ErsUsers user) {
-//		Session session = HibernateUtil.getSession();
-//		session.delete(user);
-//		HibernateUtil.closeSession();		
-//	}
-
 }

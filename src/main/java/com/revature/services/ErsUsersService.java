@@ -3,6 +3,7 @@ package com.revature.services;
 import java.util.List;
 
 import com.revature.models.ErsUsers;
+import com.revature.models.UserDTO;
 import com.revature.repositories.ErsUsersDAO;
 import com.revature.repositories.ErsUsersDaoImpl;
 
@@ -18,7 +19,7 @@ public class ErsUsersService {
 			return usersDao.getUser(ersUsersId);
 		}
 		
-		public boolean login(String ersUsername, String ersPassword) {
-			return usersDao.userLogin(ersUsername, ersPassword);
+		public boolean login(UserDTO userDto) {
+			return true;
 		}
 }
