@@ -13,6 +13,24 @@ import com.revature.utils.HibernateUtil;
 public class ErsReimbursementDaoImpl implements ErsReimbursementDAO {
 
 	@Override
+	public List<ErsReimbursement> viewAllTickets() {
+		Session session = HibernateUtil.getSession();
+		return session.createQuery("From ErsReimbursement").list();
+	}
+
+	@Override
+	public ErsReimbursement findById(int id) {
+		Session session = HibernateUtil.getSession();
+		return session.get(ErsReimbursement.class, id);
+	}
+	
+	@Override
+	public ErsReimbursement viewPastReimbursement(int ersUsersId) {
+		Session session = HibernateUtil.getSession();
+		return session.get(ErsReimbursement.class, ersUsersId);
+	}
+
+	@Override
 	public boolean addReimbursement(ErsReimbursement reimb) {
 		try {
 			Session session = HibernateUtil.getSession();
@@ -24,18 +42,6 @@ public class ErsReimbursementDaoImpl implements ErsReimbursementDAO {
 		} catch (HibernateException e) {
 			return false;
 		}
-	}
-
-	@Override
-	public ErsReimbursement viewPastReimbursement(int ersUsersId) {
-		Session session = HibernateUtil.getSession();
-		return session.get(ErsReimbursement.class, ersUsersId);
-	}
-
-	@Override
-	public List<ErsReimbursement> viewAllTickets() {
-		Session session = HibernateUtil.getSession();
-		return session.createQuery("From ErsReimbursement").list();
 	}
 
 	@Override
@@ -79,11 +85,11 @@ public class ErsReimbursementDaoImpl implements ErsReimbursementDAO {
 		}
 	}
 
-	@Override
-	public byte[] uploadReceipt() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+//	@Override
+//	public byte[] uploadReceipt() {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
 
 	@Override
 	public ErsReimbursement filterReimb(int reimbStatusId) {

@@ -6,7 +6,7 @@ import java.util.Arrays;
 import java.util.Objects;
 
 @Entity
-@Table(name="ers_reimbursement")
+//@Table(name="ers_reimbursement")
 public class ErsReimbursement {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -49,8 +49,23 @@ public class ErsReimbursement {
         this.reimbStatusId = reimbStatusId;
         this.reimb_type_id = reimb_type_id;
     }
+    
+    
 
-    public ErsReimbursement() {
+    public ErsReimbursement(int reimbId, double reimbAmount, Timestamp reimSubmitted, Timestamp reimbResolved,
+			int reimbAuthor, int reimbResolver, int reimbStatusId, int reimb_type_id) {
+		super();
+		this.reimbId = reimbId;
+		this.reimbAmount = reimbAmount;
+		this.reimSubmitted = reimSubmitted;
+		this.reimbResolved = reimbResolved;
+		this.reimbAuthor = reimbAuthor;
+		this.reimbResolver = reimbResolver;
+		this.reimbStatusId = reimbStatusId;
+		this.reimb_type_id = reimb_type_id;
+	}
+
+	public ErsReimbursement() {
     }
 
     public int getReimbId() {

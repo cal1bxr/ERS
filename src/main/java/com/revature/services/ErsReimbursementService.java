@@ -12,10 +12,20 @@ public class ErsReimbursementService {
 	public List<ErsReimbursement> getAllTickets() {
 		return reimbDao.viewAllTickets();
 	}
+	
+	public ErsReimbursement getReimb(int id) {
+		ErsReimbursement reimb = reimbDao.findById(id);
+		if (reimb != null) {
+			return reimb;
+		} else {
+			return new ErsReimbursement();
+		}
+	}
 
 	public ErsReimbursement getPastTickets(int ersUsersId) {
-		if (reimbDao != null) {
-			return reimbDao.viewPastReimbursement(ersUsersId);
+		ErsReimbursement reimb = reimbDao.viewPastReimbursement(ersUsersId);
+		if (reimb != null) {
+			return reimb;
 		} else {
 			return new ErsReimbursement();
 		}
@@ -33,12 +43,17 @@ public class ErsReimbursementService {
 		return reimbDao.describeReimb(reimb);
 	}
 	
-	public byte[] uploadReimb() {
-		return reimbDao.uploadReceipt();
-	}
+//	public byte[] uploadReimb() {
+//		return reimbDao.uploadReceipt();
+//	}
 	
 	public ErsReimbursement filterErsReimbursement(int reimbStatusId) {
-		return reimbDao.filterReimb(reimbStatusId);
+		ErsReimbursement reimb = reimbDao.viewPastReimbursement(reimbStatusId);
+		if (reimb != null) {
+			return reimb;
+		} else {
+			return new ErsReimbursement();
+		}
 	}
 	
 }

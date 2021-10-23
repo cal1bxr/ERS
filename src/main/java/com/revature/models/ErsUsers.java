@@ -1,17 +1,15 @@
 package com.revature.models;
 
 import javax.persistence.CascadeType;
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import java.util.Objects;
 
 @Entity
-@Table(name="ers_users")
+//@Table(name="ers_users")
 public class ErsUsers {
     @Id
     private int ersUsersId;

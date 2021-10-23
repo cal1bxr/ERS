@@ -1,9 +1,7 @@
 package com.revature.services;
 
-import com.revature.models.ErsUsers;
 import com.revature.models.User;
 import com.revature.models.UserDTO;
-import com.revature.repositories.UserDAO;
 
 public class LoginService {
 

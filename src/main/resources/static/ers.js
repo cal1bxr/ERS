@@ -61,34 +61,8 @@ function populateReimbsTable(data) {
             if (cell != "home") {
                 td.innerText = reimb[cell];
             } else if (reimb[cell]) {
-                td.innerText = `${reimb[cell].name}: ${reimb[cell].streetNumber} ${reimb[cell].streetName} ${reimb[cell].city } ${reimb[cell].region}, ${reimb[cell].zip} ${reimb[cell].country}`
+                td.innerText = `${reimb[cell].reimbId}: ${reimb[cell].reimbAmount}, ${reimb[cell].reimbSubmitted}, ${reimb[cell].reimbResolved}, ${reimb[cell].reimbDescr}, ${reimb[cell].reimbAuthor}, ${reimb[cell].reimbResolver}, ${reimb[cell].reimbStatus}, ${reimb[cell].reimbType}`
             }
-            row.appendChild(td);
-        }
-        tbody.appendChild(row);
-    }
-}
-
-async function getAllUsers() {
-    let response = await fetch(URL + "ersUsers", { credentials: "include" });
-    if (response.status === 200) {
-        let data = await response.json();
-        populateUsersTable(data);
-    } else {
-        console.log("Users not available.");
-    }
-}
-
-function populateUsersTable(data) {
-    let tbody = document.getElementById("ersUsersBody");
-
-    tbody.innerHTML = "";
-
-    for (let reimb of data) {
-        let row = document.createElement("tr");
-        for (let cell in reimb) {
-            let td = document.createElement("td");
-            td.innerText = reimb[cell];
             row.appendChild(td);
         }
         tbody.appendChild(row);
@@ -138,4 +112,56 @@ async function addReimb() {
         console.log("Something went wrong creating your user.")
     }
 
+}
+
+async function getAllUsers() {
+    let response = await fetch(URL + "ersUsers", { credentials: "include" });
+    if (response.status === 200) {
+        let data = await response.json();
+        populateUsersTable(data);
+    } else {
+        console.log("Users not available.");
+    }
+}
+
+function populateUsersTable(data) {
+    let tbody = document.getElementById("ersUsersBody");
+
+    tbody.innerHTML = "";
+
+    for (let user of data) {
+        let row = document.createElement("tr");
+        for (let cell in user) {
+            let td = document.createElement("td");
+            if (cell != "user") {
+                td.innerText = user[cell];
+            } else if (user[cell]) {
+                console.log("do things");
+            }
+            row.appendChild(td);
+        }
+        tbody.appendChild(row);
+    }
+}
+
+function getNewHome() {
+    let newName = document.getElementById("homeName").value;
+    let newStreetNum = document.getElementById("homeStreetNum").value;
+    let newStreetName = document.getElementById("homeStreetName").value;
+    let newCity = document.getElementById("homeCity").value;
+    let newRegion = document.getElementById("homeRegion").value;
+    let newZip = document.getElementById("homeZip").value;
+    let newCounty = document.getElementById("homeCountry").value;
+
+    let home = {
+        name: newName,
+        streetNumber: newStreetNum,
+        streetName: newStreetName,
+        city: newCity,
+        region: newRegion,
+        zip: newZip,
+        country: newCounty
+    }
+
+    return home;
 }

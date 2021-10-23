@@ -14,22 +14,23 @@ public class UsersController implements Controller{
 	private ErsUsersService userService = new ErsUsersService();
 	
 	public Handler getAllUsers = (ctx) -> {
-		List<ErsUsers> list = userService.getAllUsers();
+		if(ctx.req.getSession(false) != null) {
+		List<ErsUsers> list = userService.findAllUsers();
 		
 		ctx.json(list);
 		ctx.status(200);
+		} else {
+			ctx.status(401);
+		}
 	};
 	
 	public Handler getUser = (ctx) -> {
-		try {
-			String idString = ctx.pathParam("ers_user_id");
-			int ersUserId = Integer.parseInt(idString);
-			ErsUsers user = userService.getUserById(ersUserId);
+		if(ctx.req.getSession(false) != null) {
+			ErsUsers user = userService.getUserById(Integer.parseInt(ctx.pathParam("ers_users_id")));
 			ctx.json(user);
 			ctx.status(200);
-		} catch (NumberFormatException e) {
-			e.printStackTrace();
-			ctx.status(406);
+		} else {
+			ctx.status(401);
 		}
 	};
 	
@@ -39,9 +40,7 @@ public class UsersController implements Controller{
 
 	@Override
 	public void addRoutes(Javalin app) {
-		// TODO Auto-generated method stub
-		// TODO Auto-generated method stub
-		app.get("users", this.getAllUsers);
+		app.get("/users", this.getAllUsers);
 		app.get("/users/:user", this.getUser);
 	
 	}

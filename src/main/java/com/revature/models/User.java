@@ -4,18 +4,15 @@ public class User {
 
 		private String username;
 		private int password;
-		private String rold;
-		public User(String username, int password, String rold) {
+		private String role;
+		
+		public User(String username, int password, String role) {
 			super();
 			this.username = username;
 			this.password = password;
-			this.rold = rold;
+			this.role = role;
 		}
 		public int getPassword() {
 			return password;
-		}
-		public void setPassword(int password) {
-			this.password = password;
-		}
-		
+		}		
 }

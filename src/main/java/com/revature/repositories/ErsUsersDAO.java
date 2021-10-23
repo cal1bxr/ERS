@@ -6,9 +6,9 @@ import com.revature.models.ErsUsers;
 
 public interface ErsUsersDAO {
 
-	public List<ErsUsers> getAllUsers();
+	List<ErsUsers> getAllUsers();
 
-	public ErsUsers getUser(int ersUsersId);
+	ErsUsers getUser(int ersUsersId);
 
-	public ErsUsers getByUsername(String username);
+	ErsUsers getByUsername(String username);
 }
