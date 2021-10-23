@@ -53,15 +53,15 @@ function populateReimbsTable(data) {
 
     tbody.innerHTML = "";
 
-    for (let avenger of data) {
+    for (let reimb of data) {
         let row = document.createElement("tr");
 
-        for (let cell in avenger) {
+        for (let cell in reimb) {
             let td = document.createElement("td");
             if (cell != "home") {
-                td.innerText = avenger[cell];
-            } else if (avenger[cell]) {
-                td.innerText = `${avenger[cell].name}: ${avenger[cell].streetNumber} ${avenger[cell].streetName} ${avenger[cell].city } ${avenger[cell].region}, ${avenger[cell].zip} ${avenger[cell].country}`
+                td.innerText = reimb[cell];
+            } else if (reimb[cell]) {
+                td.innerText = `${reimb[cell].name}: ${reimb[cell].streetNumber} ${reimb[cell].streetName} ${reimb[cell].city } ${reimb[cell].region}, ${reimb[cell].zip} ${reimb[cell].country}`
             }
             row.appendChild(td);
         }
@@ -75,7 +75,7 @@ async function getAllUsers() {
         let data = await response.json();
         populateUsersTable(data);
     } else {
-        console.log("Usres not available.");
+        console.log("Users not available.");
     }
 }
 
@@ -84,52 +84,58 @@ function populateUsersTable(data) {
 
     tbody.innerHTML = "";
 
-    for (let home of data) {
+    for (let reimb of data) {
         let row = document.createElement("tr");
-        for (let cell in home) {
+        for (let cell in reimb) {
             let td = document.createElement("td");
-            td.innerText = home[cell];
+            td.innerText = reimb[cell];
             row.appendChild(td);
         }
         tbody.appendChild(row);
     }
 }
 
-//   function getUser(){
-//     let newName = document.getElementById("homeName").value;
-//     let newStreetNum = document.getElementById("homeStreetNum").value; 
-//     let newStreetName = document.getElementById("homeStreetName").value;
-//     let newCity = document.getElementById("homeCity").value;
-//     let newRegion = document.getElementById("homeRegion").value;
-//     let newZip = document.getElementById("homeZip").value;
-//     let newCounty = document.getElementById("homeCountry").value;
+function getNewReimb() {
+    let newReimbId = document.getElementById("username").value;
+    let newReimbAmount = document.getElementById("firstName").value;
+    let newReimbSubmitted = document.getElementById("LastName").value;
+    let newReimbResolved = document.getElementById("email").value;
+    let newReimbDescr = document.getElementById("roleId").value;
+    // let newReimbReceipt = document.getElementById().value;
+    let newReimbAuthor = document.getElementById("reimbursementAuthor").value;
+    let newReimbResolver = document.getElementById("reimbursementAuthor").value;
+    let newReimbStatus = document.getElementById("reimbursementStatus").value;
+    let newReimbType = document.getElementById("reimbursementType").value;
 
-//     let home =  {
-//       name:newName,
-//       streetNumber:newStreetNum,
-//       streetName:newStreetName,
-//       city:newCity,
-//       region:newRegion,
-//       zip:newZip,
-//       country:newCounty
-//     }
 
-//     return home;
-//   }
+    let user = {
+        reimbId: newReimbId,
+        reimbamount: newReimbAmount,
+        reimbSubmitted: newReimbSubmitted,
+        reimbResolved: newReimbResolved,
+        reimbDescr: newReimbDescr,
+        reimbAuthor: newReimbAuthor,
+        reimbResolver: newReimbResolver,
+        reimbStatus: newReimbStatus,
+        reimbType: newReimbType
+    }
 
-//   async function addHome(){
-//     let home = getNewHome();
+    return user;
+}
 
-//     let response = await fetch(URL+"homes", {
-//       method:'POST',
-//       body:JSON.stringify(home),
-//       credentials:"include"
-//     });
+async function addReimb() {
+    let reimb = getnewReimb();
 
-//     if(response.status===201){
-//       console.log("Home created successfully.");
-//     }else{
-//       console.log("Something went wrong creating your home.")
-//     }
+    let response = await fetch(URL + "reimbs", {
+        method: 'POST',
+        body: JSON.stringify(reimb),
+        credentials: "include"
+    });
 
-//   }
+    if (response.status === 201) {
+        console.log("User created successfully.");
+    } else {
+        console.log("Something went wrong creating your user.")
+    }
+
+}

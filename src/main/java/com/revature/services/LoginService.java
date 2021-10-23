@@ -1,17 +1,17 @@
 package com.revature.services;
 
 import com.revature.models.ErsUsers;
+import com.revature.models.User;
 import com.revature.models.UserDTO;
-import com.revature.repositories.ErsUsersDAO;
-import com.revature.repositories.ErsUsersDaoImpl;
+import com.revature.repositories.UserDAO;
 
 public class LoginService {
 
-	private ErsUsersDAO ersUser = new ErsUsersDaoImpl();
-
+	private UserDAO userDao = new UserDAO();
+	
 	public boolean login(UserDTO userDto) {
-		ErsUsers ersUser = ersUser.getErsUsername();
-		if (ersUsername != null && (userDto.password.hashCode() == ersUser.getPassword())) {
+		User user = userDao.getByUsername(userDto.username);
+		if (user != null && (userDto.password.hashCode() == user.getPassword())) {
 			return true;
 		}
 
