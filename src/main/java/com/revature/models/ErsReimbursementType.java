@@ -1,15 +1,19 @@
 package com.revature.models;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import java.util.Objects;
 
 @Entity
-@Table(name="ers_reimbursment_type")
+//@Table(name="ers_reimbursment_type")
 public class ErsReimbursementType {
     @Id
+    @Column(name = "reimb_type_id")
     private int reimbTypeId;
+    
+    @Column(name = "reimb_type")
     private String reimbType;
 
     public ErsReimbursementType(int reimbTypeId, String reimbType) {

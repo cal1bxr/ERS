@@ -22,14 +22,14 @@ public class ErsReimbursementService {
 		}
 	}
 
-	public ErsReimbursement getPastTickets(int ersUsersId) {
-		ErsReimbursement reimb = reimbDao.viewPastReimbursement(ersUsersId);
-		if (reimb != null) {
-			return reimb;
-		} else {
-			return new ErsReimbursement();
-		}
-	}
+//	public ErsReimbursement getPastTickets(int ersUsersId) {
+//		ErsReimbursement reimb = reimbDao.viewPastReimbursement(ersUsersId);
+//		if (reimb != null) {
+//			return reimb;
+//		} else {
+//			return new ErsReimbursement();
+//		}
+//	}
 	
 	public boolean addErsReimbursement(ErsReimbursement reimb) {
 		return reimbDao.addReimbursement(reimb);
@@ -47,13 +47,13 @@ public class ErsReimbursementService {
 //		return reimbDao.uploadReceipt();
 //	}
 	
-	public ErsReimbursement filterErsReimbursement(int reimbStatusId) {
-		ErsReimbursement reimb = reimbDao.viewPastReimbursement(reimbStatusId);
-		if (reimb != null) {
-			return reimb;
-		} else {
-			return new ErsReimbursement();
-		}
-	}
-	
+//	public ErsReimbursement filterErsReimbursement(int reimbStatusId) {
+//		ErsReimbursement reimb = reimbDao.viewPastReimbursement(reimbStatusId);
+//		if (reimb != null) {
+//			return reimb;
+//		} else {
+//			return new ErsReimbursement();
+//		}
+//	}
+//	
 }

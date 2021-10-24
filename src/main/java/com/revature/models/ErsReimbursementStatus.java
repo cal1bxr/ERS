@@ -1,5 +1,6 @@
 package com.revature.models;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
@@ -7,17 +8,20 @@ import java.util.Objects;
 
 @Entity
 @Table(name="ers_reimbursment_status")
-public class ErsReimbursmentStatus {
+public class ErsReimbursementStatus {
     @Id
+    @Column(name = "reimb_status_id")
     private int reimbStatusId;
+    
+    @Column(name = "reimb_status")
     private String reimbStatus;
 
-    public ErsReimbursmentStatus(int reimbStatusId, String reimbStatus) {
+    public ErsReimbursementStatus(int reimbStatusId, String reimbStatus) {
         this.reimbStatusId = reimbStatusId;
         this.reimbStatus = reimbStatus;
     }
 
-    public ErsReimbursmentStatus() {
+    public ErsReimbursementStatus() {
     }
 
     public int getReimbStatusId() {
@@ -40,7 +44,7 @@ public class ErsReimbursmentStatus {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        ErsReimbursmentStatus that = (ErsReimbursmentStatus) o;
+        ErsReimbursementStatus that = (ErsReimbursementStatus) o;
         return reimbStatusId == that.reimbStatusId && Objects.equals(reimbStatus, that.reimbStatus);
     }
 

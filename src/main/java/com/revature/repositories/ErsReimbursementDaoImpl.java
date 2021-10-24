@@ -15,7 +15,7 @@ public class ErsReimbursementDaoImpl implements ErsReimbursementDAO {
 	@Override
 	public List<ErsReimbursement> viewAllTickets() {
 		Session session = HibernateUtil.getSession();
-		return session.createQuery("From ErsReimbursement").list();
+		return session.createQuery("FROM ErsReimbursement").list();
 	}
 
 	@Override
@@ -24,11 +24,11 @@ public class ErsReimbursementDaoImpl implements ErsReimbursementDAO {
 		return session.get(ErsReimbursement.class, id);
 	}
 	
-	@Override
-	public ErsReimbursement viewPastReimbursement(int ersUsersId) {
-		Session session = HibernateUtil.getSession();
-		return session.get(ErsReimbursement.class, ersUsersId);
-	}
+//	@Override
+//	public ErsReimbursement viewPastReimbursement(int ersUsersId) {
+//		Session session = HibernateUtil.getSession();
+//		return session.get(ErsReimbursement.class, ersUsersId);
+//	}
 
 	@Override
 	public boolean addReimbursement(ErsReimbursement reimb) {

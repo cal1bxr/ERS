@@ -22,21 +22,21 @@ public class ReimbursementController implements Controller{
 		}
 	};
 	
-	public Handler getPastTickets = (ctx) -> {
-		if (ctx.req.getSession(false) != null) {
-			try {
-				int id = Integer.parseInt(ctx.pathParam("ers_user_id"));
-				ErsReimbursement reimb = reimbService.getPastTickets(id);
-				ctx.json(reimb);
-				ctx.status(200);
-			} catch (NumberFormatException e) {
-				e.printStackTrace();
-				ctx.status(406);
-			}
-		} else {
-			ctx.status(401);
-		}
-	};
+//	public Handler getPastTickets = (ctx) -> {
+//		if (ctx.req.getSession(false) != null) {
+//			try {
+//				int id = Integer.parseInt(ctx.pathParam("ers_user_id"));
+//				ErsReimbursement reimb = reimbService.getPastTickets(id);
+//				ctx.json(reimb);
+//				ctx.status(200);
+//			} catch (NumberFormatException e) {
+//				e.printStackTrace();
+//				ctx.status(406);
+//			}
+//		} else {
+//			ctx.status(401);
+//		}
+//	};
 	
 	public Handler addReimb = (ctx) -> {
 		if(ctx.req.getSession(false) != null) {
@@ -82,11 +82,11 @@ public class ReimbursementController implements Controller{
 	@Override
 	public void addRoutes(Javalin app) {
 		// TODO Auto-generated method stub
-		app.get("reimbursements", this.getAllReimbs);
-		app.get("/reimbursements/:tickets", this.getPastTickets);
-		app.post("/reimbursements", this.addReimb);
-		app.put("/reimbursements", this.updateReimb);
-		app.put("/reimbursements/:reimb", this.updateDescReimb);
+		app.get("reimbs", this.getAllReimbs);
+//		app.get("/reimbs/:tickets", this.getPastTickets);
+		app.post("/reimbs", this.addReimb);
+		app.put("/reimbs", this.updateReimb);
+		app.put("/reimbs/:reimb", this.updateDescReimb);
 		
 	}
 	}

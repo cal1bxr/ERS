@@ -2,7 +2,7 @@ const URL = "http://localhost:8081/";
 
 let buttonRow = document.getElementById("buttonRow");
 let reimbButton = document.createElement("button");
-let userButton = doucment.createElement("button");
+let userButton = document.createElement("button");
 let addReimbButton = document.getElementById("addReimbButton");
 let loginButton = document.getElementById('loginButton');
 
@@ -98,7 +98,7 @@ function getNewReimb() {
 }
 
 async function addReimb() {
-    let reimb = getnewReimb();
+    let reimb = getNewReimb();
 
     let response = await fetch(URL + "reimbs", {
         method: 'POST',
@@ -133,11 +133,9 @@ function populateUsersTable(data) {
         let row = document.createElement("tr");
         for (let cell in user) {
             let td = document.createElement("td");
-            if (cell != "user") {
-                td.innerText = user[cell];
-            } else if (user[cell]) {
-                console.log("do things");
-            }
+            td.innerText = user[cell];
+            // td.innerText = `${user[cell].ersUserName}: ${user[cell].userFirstName}, ${user[cell].userLastName}, ${user[cell].userEmail}, ${user[cell].userRoleId}`;
+
             row.appendChild(td);
         }
         tbody.appendChild(row);

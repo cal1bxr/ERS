@@ -27,13 +27,14 @@
             <tr>
                 <th class="col-sm-1">ERS User ID</th>
                 <th class="col-sm-2">Username</th>
+                <th class="col-sm-1">Password</th>
                 <th class="col-sm-1">First Name</th>
                 <th class="col-sm-1">Last Name</th>
                 <th class="col-sm-1">Email</th>
                 <th class="col-sm-6">ERS Role ID</th>
             </tr>
         </thead>
-        <tbody id="ersUserBody">
+        <tbody id="ersUsersBody">
         </tbody>
     </table>
     <br>
@@ -46,7 +47,7 @@
                 <th class="col-sm-2">Reimbursement Submitted</th>
                 <th class="col-sm-2">REimbursement Resolved</th>
                 <th class="col-sm-2">Reimbursment Description</th>
-                <th class="col-sm-1">Reimbursement Receipt</th>
+                <!-- <th class="col-sm-1">Reimbursement Receipt</th> -->
                 <th class="col-sm-1">Reimbursement Author</th>
                 <th class="col-sm-1">Reimbursement Resolver</th>
                 <th class="col-sm-1">Reimbursement Status</th>
@@ -83,6 +84,8 @@
     <br>
 
     <form class="form-control">
+        <label for="username">ERS User ID</label>
+        <input type="text" id="username" name="usrname">
         <label for="reimbursementAmount">Reimbursement Amount</label>
         <input type="text" id="reimbursementAmount" name="reimbursementAmount">
         <label for="reimbursementSubmitted">Reimbursement Submitted</label>

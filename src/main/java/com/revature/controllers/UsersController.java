@@ -40,8 +40,8 @@ public class UsersController implements Controller{
 
 	@Override
 	public void addRoutes(Javalin app) {
-		app.get("/users", this.getAllUsers);
-		app.get("/users/:user", this.getUser);
+		app.get("/ersUsers", this.getAllUsers);
+		app.get("/ersUsers/:user", this.getUser);
 	
 	}
 		

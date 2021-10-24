@@ -7,7 +7,11 @@ import java.util.Objects;
 @Table(name="ers_user_roles")
 public class ErsUserRoles {
     @Id
+//    @ManyToOne
+    @Column(name = "ers_user_role_id")
     private int userRoleId;
+    
+    @Column(name = "reimb_status_id")
     private String userRole;
 
     public ErsUserRoles(int userRoleId, String userRole) {

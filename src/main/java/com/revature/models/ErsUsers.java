@@ -1,6 +1,7 @@
 package com.revature.models;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
@@ -9,16 +10,29 @@ import javax.persistence.Table;
 import java.util.Objects;
 
 @Entity
-//@Table(name="ers_users")
+@Table(name="ers_users")
 public class ErsUsers {
     @Id
+    @Column(name = "ers_users_id")
     private int ersUsersId;
+    
+    @Column(name = "ers_username")
     private String ersUsername;
+    
+    @Column(name = "ers_password")
     private String ersPassword;
+    
+    @Column(name = "user_first_name")
     private String userFirstName;
+    
+    @Column(name = "user_last_name")
     private String userLastName;
+    
+    @Column(name = "user_email")
     private String userEmail;
-    @ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
+    
+//    @ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
+    @Column(name = "user_role_id")
     private int userRoleId;
 
     public ErsUsers(int ersUsersId, String ersUsername, String ersPassword, String userFirstName, String userLastName, String userEmail, int userRoleId) {
@@ -30,8 +44,21 @@ public class ErsUsers {
         this.userEmail = userEmail;
         this.userRoleId = userRoleId;
     }
+    
+    public ErsUsers(int ersUsersId, String ersUsername, String userFirstName, String userLastName, String userEmail,
+			int userRoleId) {
+		super();
+		this.ersUsersId = ersUsersId;
+		this.ersUsername = ersUsername;
+		this.userFirstName = userFirstName;
+		this.userLastName = userLastName;
+		this.userEmail = userEmail;
+		this.userRoleId = userRoleId;
+	}
 
-    public ErsUsers() {
+
+
+	public ErsUsers() {
     }
 
     public int getErsUsersId() {

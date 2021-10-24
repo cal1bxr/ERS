@@ -16,7 +16,7 @@ public class ErsUsersDaoImpl implements ErsUsersDAO {
 	@Override
 	public List<ErsUsers> getAllUsers() {
 		Session session = HibernateUtil.getSession();
-		return session.createQuery("From ErsUsers").list();
+		return session.createQuery("FROM ErsUsers").list();
 	}
 
 	@Override
