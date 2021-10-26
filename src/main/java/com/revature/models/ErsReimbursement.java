@@ -27,28 +27,33 @@ public class ErsReimbursement {
     @Lob
     private byte[] reimbReceipt;
     
-    @ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
     @JoinColumn(name="ersUsersId")
-    @Column(name = "reimb_author", nullable=false)
     private int reimbAuthor;
     
-    @ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
     @JoinColumn(name="ersUsersId")
-    @Column(name = "reimb_resolver", nullable=false)
     private int reimbResolver;
     
-    @ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
-    @JoinColumn(name= "reimbStatusId")
-    @Column(name = "reimb_status_id", nullable=false)
-    private int reimbStatusId;
+//    @JoinColumn(name= "reimbStatusId")
+//    private int reimbStatus;
+//    
+//    @JoinColumn(name="reimbTypeId")
+//    private int reimbType;
     
     @ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
-    @JoinColumn(name="reimbTypeId")
-    @Column(name = "reimb_type_id", nullable=false)
-    private int reimbTypeId;
+    @JoinColumn(name = "ersUsersId")
+    private ErsUsers ersUsers;
+    
+    @ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
+    @JoinColumn(name = "reimbTypeId")
+    private ErsReimbursementType reimbType;
+    
+    @ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
+    @JoinColumn(name = "reimbStatusId")
+    private ErsReimbursementStatus reimbStatus;
 
 	public ErsReimbursement(int reimbId, double reimbAmount, LocalDateTime reimbSubmitted, LocalDateTime reimbResolved,
-			byte[] reimbReceipt, int reimbAuthor, int reimbResolver, int reimbStatusId, int reimb_type_id) {
+			byte[] reimbReceipt, int reimbAuthor, int reimbResolver, ErsUsers ersUsers, ErsReimbursementType reimbType,
+			ErsReimbursementStatus reimbStatus) {
 		super();
 		this.reimbId = reimbId;
 		this.reimbAmount = reimbAmount;
@@ -57,13 +62,14 @@ public class ErsReimbursement {
 		this.reimbReceipt = reimbReceipt;
 		this.reimbAuthor = reimbAuthor;
 		this.reimbResolver = reimbResolver;
-		this.reimbStatusId = reimbStatusId;
-		this.reimbTypeId = reimb_type_id;
+		this.ersUsers = ersUsers;
+		this.reimbType = reimbType;
+		this.reimbStatus = reimbStatus;
 	}
 
-
-	public ErsReimbursement(double reimbAmount, LocalDateTime reimbSubmitted, LocalDateTime reimbResolved, byte[] reimbReceipt,
-			int reimbAuthor, int reimbResolver, int reimbStatusId, int reimb_type_id) {
+	public ErsReimbursement(double reimbAmount, LocalDateTime reimbSubmitted, LocalDateTime reimbResolved,
+			byte[] reimbReceipt, int reimbAuthor, int reimbResolver, ErsUsers ersUsers, ErsReimbursementType reimbType,
+			ErsReimbursementStatus reimbStatus) {
 		super();
 		this.reimbAmount = reimbAmount;
 		this.reimbSubmitted = reimbSubmitted;
@@ -71,123 +77,100 @@ public class ErsReimbursement {
 		this.reimbReceipt = reimbReceipt;
 		this.reimbAuthor = reimbAuthor;
 		this.reimbResolver = reimbResolver;
-		this.reimbStatusId = reimbStatusId;
-		this.reimbTypeId = reimb_type_id;
+		this.ersUsers = ersUsers;
+		this.reimbType = reimbType;
+		this.reimbStatus = reimbStatus;
 	}
-
-
-	public ErsReimbursement(double reimbAmount, LocalDateTime reimbSubmitted, LocalDateTime reimbResolved, int reimbAuthor,
-			int reimbResolver, int reimbStatusId, int reimb_type_id) {
-		super();
-		this.reimbAmount = reimbAmount;
-		this.reimbSubmitted = reimbSubmitted;
-		this.reimbResolved = reimbResolved;
-		this.reimbAuthor = reimbAuthor;
-		this.reimbResolver = reimbResolver;
-		this.reimbStatusId = reimbStatusId;
-		this.reimbTypeId = reimb_type_id;
-	}
-
 
 	public ErsReimbursement() {
 		super();
 	}
 
-
 	public int getReimbId() {
 		return reimbId;
 	}
-
 
 	public void setReimbId(int reimbId) {
 		this.reimbId = reimbId;
 	}
 
-
 	public double getReimbAmount() {
 		return reimbAmount;
 	}
-
 
 	public void setReimbAmount(double reimbAmount) {
 		this.reimbAmount = reimbAmount;
 	}
 
-
 	public LocalDateTime getReimbSubmitted() {
 		return reimbSubmitted;
 	}
-
 
 	public void setReimbSubmitted(LocalDateTime reimbSubmitted) {
 		this.reimbSubmitted = reimbSubmitted;
 	}
 
-
 	public LocalDateTime getReimbResolved() {
 		return reimbResolved;
 	}
-
 
 	public void setReimbResolved(LocalDateTime reimbResolved) {
 		this.reimbResolved = reimbResolved;
 	}
 
-
 	public byte[] getReimbReceipt() {
 		return reimbReceipt;
 	}
-
 
 	public void setReimbReceipt(byte[] reimbReceipt) {
 		this.reimbReceipt = reimbReceipt;
 	}
 
-
 	public int getReimbAuthor() {
 		return reimbAuthor;
 	}
-
 
 	public void setReimbAuthor(int reimbAuthor) {
 		this.reimbAuthor = reimbAuthor;
 	}
 
-
 	public int getReimbResolver() {
 		return reimbResolver;
 	}
-
 
 	public void setReimbResolver(int reimbResolver) {
 		this.reimbResolver = reimbResolver;
 	}
 
-
-	public int getReimbStatusId() {
-		return reimbStatusId;
+	public ErsUsers getErsUsers() {
+		return ersUsers;
 	}
 
-
-	public void setReimbStatusId(int reimbStatusId) {
-		this.reimbStatusId = reimbStatusId;
+	public void setErsUsers(ErsUsers ersUsers) {
+		this.ersUsers = ersUsers;
 	}
 
-
-	public int getReimb_type_id() {
-		return reimbTypeId;
+	public ErsReimbursementType getReimbType() {
+		return reimbType;
 	}
 
-
-	public void setReimb_type_id(int reimb_type_id) {
-		this.reimbTypeId = reimb_type_id;
+	public void setReimbType(ErsReimbursementType reimbType) {
+		this.reimbType = reimbType;
 	}
 
+	public ErsReimbursementStatus getReimbStatus() {
+		return reimbStatus;
+	}
+
+	public void setReimbStatus(ErsReimbursementStatus reimbStatus) {
+		this.reimbStatus = reimbStatus;
+	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result + ((ersUsers == null) ? 0 : ersUsers.hashCode());
 		long temp;
 		temp = Double.doubleToLongBits(reimbAmount);
 		result = prime * result + (int) (temp ^ (temp >>> 32));
@@ -196,12 +179,9 @@ public class ErsReimbursement {
 		result = prime * result + Arrays.hashCode(reimbReceipt);
 		result = prime * result + ((reimbResolved == null) ? 0 : reimbResolved.hashCode());
 		result = prime * result + reimbResolver;
-		result = prime * result + reimbStatusId;
 		result = prime * result + ((reimbSubmitted == null) ? 0 : reimbSubmitted.hashCode());
-		result = prime * result + reimbTypeId;
 		return result;
 	}
-
 
 	@Override
 	public boolean equals(Object obj) {
@@ -212,6 +192,11 @@ public class ErsReimbursement {
 		if (getClass() != obj.getClass())
 			return false;
 		ErsReimbursement other = (ErsReimbursement) obj;
+		if (ersUsers == null) {
+			if (other.ersUsers != null)
+				return false;
+		} else if (!ersUsers.equals(other.ersUsers))
+			return false;
 		if (Double.doubleToLongBits(reimbAmount) != Double.doubleToLongBits(other.reimbAmount))
 			return false;
 		if (reimbAuthor != other.reimbAuthor)
@@ -227,28 +212,22 @@ public class ErsReimbursement {
 			return false;
 		if (reimbResolver != other.reimbResolver)
 			return false;
-		if (reimbStatusId != other.reimbStatusId)
-			return false;
 		if (reimbSubmitted == null) {
 			if (other.reimbSubmitted != null)
 				return false;
 		} else if (!reimbSubmitted.equals(other.reimbSubmitted))
 			return false;
-		if (reimbTypeId != other.reimbTypeId)
-			return false;
 		return true;
 	}
-
 
 	@Override
 	public String toString() {
 		return "ErsReimbursement [reimbId=" + reimbId + ", reimbAmount=" + reimbAmount + ", reimbSubmitted="
 				+ reimbSubmitted + ", reimbResolved=" + reimbResolved + ", reimbReceipt="
 				+ Arrays.toString(reimbReceipt) + ", reimbAuthor=" + reimbAuthor + ", reimbResolver=" + reimbResolver
-				+ ", reimbStatusId=" + reimbStatusId + ", reimb_type_id=" + reimbTypeId + "]";
+				+ ", ersUsers=" + ersUsers + ", reimbType=" + reimbType + ", reimbStatus=" + reimbStatus + "]";
 	}
-	
-	
-
+    
+    
 
 }

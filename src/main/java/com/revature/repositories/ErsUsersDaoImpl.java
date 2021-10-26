@@ -6,9 +6,11 @@ import javax.persistence.Query;
 
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.revature.models.ErsUserRoles;
 import com.revature.models.ErsUsers;
 import com.revature.utils.HibernateUtil;
 
@@ -25,6 +27,34 @@ public class ErsUsersDaoImpl implements ErsUsersDAO {
 	public ErsUsers getUser(int ersUsersId) {
 		Session session = HibernateUtil.getSession();
 		return session.get(ErsUsers.class, ersUsersId);
+	}
+
+	@Override
+	public boolean addErsUser(ErsUsers ersUser) {
+		try {
+			Session session = HibernateUtil.getSession();
+			Transaction tx = session.beginTransaction();
+			session.save(ersUser);
+			tx.commit();
+			HibernateUtil.closeSession();
+			return true;
+		} catch (HibernateException e) {
+			return false;
+		}
+	}
+
+	@Override
+	public boolean addErsUserRoles(ErsUserRoles ersUser) {
+		try {
+			Session session = HibernateUtil.getSession();
+			Transaction tx = session.beginTransaction();
+			session.save(ersUser);
+			tx.commit();
+			HibernateUtil.closeSession();
+			return true;
+		} catch (HibernateException e) {
+			return false;
+		}
 	};
 
 //	@Override

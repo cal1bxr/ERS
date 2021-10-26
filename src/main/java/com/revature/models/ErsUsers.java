@@ -34,36 +34,35 @@ public class ErsUsers {
     @Column(name = "ers_email", length=150, nullable=false)
     private String ersEmail;
     
+    private int ersRoleId;
+    
     @ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
     @JoinColumn(name = "userRoleId")
-    @Column(name = "ers_role_id", nullable=false)
-    private int ersRoleId;
-        
-//    private ErsUserRoles ersUserRoles;
+    private ErsUserRoles ersRoles;
 
-	public ErsUsers(int ersUsersId, String ersUsername, String ersPassword, String userFirstName, String userLastName,
-			String userEmail, int userRoleId) {
+	public ErsUsers(int ersUsersId, String ersUsername, String ersPassword, String ersFirstName, String ersLastName,
+			String ersEmail, int ersRoleId, ErsUserRoles ersRoles) {
 		super();
 		this.ersUsersId = ersUsersId;
 		this.ersUsername = ersUsername;
 		this.ersPassword = ersPassword;
-		this.ersFirstName = userFirstName;
-		this.ersLastName = userLastName;
-		this.ersEmail = userEmail;
-		this.ersRoleId = userRoleId;
-//		this.ersUserRoles = ersUserRoles;
+		this.ersFirstName = ersFirstName;
+		this.ersLastName = ersLastName;
+		this.ersEmail = ersEmail;
+		this.ersRoleId = ersRoleId;
+		this.ersRoles = ersRoles;
 	}
 
-	public ErsUsers(String ersUsername, String ersPassword, String userFirstName, String userLastName, String userEmail,
-			int userRoleId) {
+	public ErsUsers(String ersUsername, String ersPassword, String ersFirstName, String ersLastName, String ersEmail,
+			int ersRoleId, ErsUserRoles ersRoles) {
 		super();
 		this.ersUsername = ersUsername;
 		this.ersPassword = ersPassword;
-		this.ersFirstName = userFirstName;
-		this.ersLastName = userLastName;
-		this.ersEmail = userEmail;
-		this.ersRoleId = userRoleId;
-//		this.ersUserRoles = ersUserRoles;
+		this.ersFirstName = ersFirstName;
+		this.ersLastName = ersLastName;
+		this.ersEmail = ersEmail;
+		this.ersRoleId = ersRoleId;
+		this.ersRoles = ersRoles;
 	}
 
 	public ErsUsers() {
@@ -94,57 +93,57 @@ public class ErsUsers {
 		this.ersPassword = ersPassword;
 	}
 
-	public String getUserFirstName() {
+	public String getErsFirstName() {
 		return ersFirstName;
 	}
 
-	public void setUserFirstName(String userFirstName) {
-		this.ersFirstName = userFirstName;
+	public void setErsFirstName(String ersFirstName) {
+		this.ersFirstName = ersFirstName;
 	}
 
-	public String getUserLastName() {
+	public String getErsLastName() {
 		return ersLastName;
 	}
 
-	public void setUserLastName(String userLastName) {
-		this.ersLastName = userLastName;
+	public void setErsLastName(String ersLastName) {
+		this.ersLastName = ersLastName;
 	}
 
-	public String getUserEmail() {
+	public String getErsEmail() {
 		return ersEmail;
 	}
 
-	public void setUserEmail(String userEmail) {
-		this.ersEmail = userEmail;
+	public void setErsEmail(String ersEmail) {
+		this.ersEmail = ersEmail;
 	}
 
-	public int getUserRoleId() {
+	public int getErsRoleId() {
 		return ersRoleId;
 	}
 
-	public void setUserRoleId(int userRoleId) {
-		this.ersRoleId = userRoleId;
+	public void setErsRoleId(int ersRoleId) {
+		this.ersRoleId = ersRoleId;
 	}
 
-//	public ErsUserRoles getErsUserRoles() {
-//		return ersUserRoles;
-//	}
+	public ErsUserRoles getErsRoles() {
+		return ersRoles;
+	}
 
-//	public void setErsUserRoles(ErsUserRoles ersUserRoles) {
-//		this.ersUserRoles = ersUserRoles;
-//	}
+	public void setErsRoles(ErsUserRoles ersRoles) {
+		this.ersRoles = ersRoles;
+	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((ersPassword == null) ? 0 : ersPassword.hashCode());
-		result = prime * result + ((ersUsername == null) ? 0 : ersUsername.hashCode());
-		result = prime * result + ersUsersId;
 		result = prime * result + ((ersEmail == null) ? 0 : ersEmail.hashCode());
 		result = prime * result + ((ersFirstName == null) ? 0 : ersFirstName.hashCode());
 		result = prime * result + ((ersLastName == null) ? 0 : ersLastName.hashCode());
+		result = prime * result + ((ersPassword == null) ? 0 : ersPassword.hashCode());
 		result = prime * result + ersRoleId;
+		result = prime * result + ((ersUsername == null) ? 0 : ersUsername.hashCode());
+		result = prime * result + ersUsersId;
 		return result;
 	}
 
@@ -157,18 +156,6 @@ public class ErsUsers {
 		if (getClass() != obj.getClass())
 			return false;
 		ErsUsers other = (ErsUsers) obj;
-		if (ersPassword == null) {
-			if (other.ersPassword != null)
-				return false;
-		} else if (!ersPassword.equals(other.ersPassword))
-			return false;
-		if (ersUsername == null) {
-			if (other.ersUsername != null)
-				return false;
-		} else if (!ersUsername.equals(other.ersUsername))
-			return false;
-		if (ersUsersId != other.ersUsersId)
-			return false;
 		if (ersEmail == null) {
 			if (other.ersEmail != null)
 				return false;
@@ -184,7 +171,19 @@ public class ErsUsers {
 				return false;
 		} else if (!ersLastName.equals(other.ersLastName))
 			return false;
+		if (ersPassword == null) {
+			if (other.ersPassword != null)
+				return false;
+		} else if (!ersPassword.equals(other.ersPassword))
+			return false;
 		if (ersRoleId != other.ersRoleId)
+			return false;
+		if (ersUsername == null) {
+			if (other.ersUsername != null)
+				return false;
+		} else if (!ersUsername.equals(other.ersUsername))
+			return false;
+		if (ersUsersId != other.ersUsersId)
 			return false;
 		return true;
 	}
@@ -192,11 +191,12 @@ public class ErsUsers {
 	@Override
 	public String toString() {
 		return "ErsUsers [ersUsersId=" + ersUsersId + ", ersUsername=" + ersUsername + ", ersPassword=" + ersPassword
-				+ ", userFirstName=" + ersFirstName + ", userLastName=" + ersLastName + ", userEmail=" + ersEmail
-				+ ", userRoleId=" + ersRoleId + "]";
+				+ ", ersFirstName=" + ersFirstName + ", ersLastName=" + ersLastName + ", ersEmail=" + ersEmail
+				+ ", ersRoleId=" + ersRoleId + ", ersRoles=" + ersRoles + "]";
 	}
+    
+    
 
-    
-    
+	
 
 }
