@@ -134,7 +134,7 @@ function populateUsersTable(data) {
         for (let cell in user) {
             let td = document.createElement("td");
             td.innerText = user[cell];
-            // td.innerText = `${user[cell].ersUserName}: ${user[cell].userFirstName}, ${user[cell].userLastName}, ${user[cell].userEmail}, ${user[cell].userRoleId}`;
+            // td.innerText = `${user[cell].name}: ${user[cell].userFirstName}, ${user[cell].userLastName}, ${user[cell].userEmail}, ${user[cell].userRoleId}`;
 
             row.appendChild(td);
         }

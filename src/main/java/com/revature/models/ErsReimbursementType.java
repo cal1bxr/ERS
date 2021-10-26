@@ -1,19 +1,23 @@
 package com.revature.models;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import java.util.Objects;
 
 @Entity
-//@Table(name="ers_reimbursment_type")
+@Table(name="ers_reimbursment_type")
 public class ErsReimbursementType {
     @Id
-    @Column(name = "reimb_type_id")
+    @OneToMany(mappedBy="reimbTypeId", fetch=FetchType.LAZY, cascade=CascadeType.ALL)
+    @Column(name = "reimb_type_id", nullable=false)
     private int reimbTypeId;
     
-    @Column(name = "reimb_type")
+    @Column(name = "reimb_type", length=10, nullable=false)
     private String reimbType;
 
     public ErsReimbursementType(int reimbTypeId, String reimbType) {

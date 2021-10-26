@@ -10,5 +10,5 @@ public interface ErsUsersDAO {
 
 	ErsUsers getUser(int ersUsersId);
 
-	ErsUsers getByUsername(String username);
+//	ErsUsers getByUsername(String username);
 }

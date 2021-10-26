@@ -2,6 +2,8 @@ package com.revature.repositories;
 
 import java.util.List;
 
+import javax.persistence.Query;
+
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.slf4j.Logger;
@@ -25,12 +27,16 @@ public class ErsUsersDaoImpl implements ErsUsersDAO {
 		return session.get(ErsUsers.class, ersUsersId);
 	};
 
-	@Override
-	public ErsUsers getByUsername(String username) {
-		ErsUsers ersUser = new ErsUsers();
-		if(username.equals(ersUser.getErsUsername())){
-			return ersUser;
-		}
-		return null;
-	}
+//	@Override
+//	public ErsUsers getByUsername(String ersUsername) {
+//		Session session = HibernateUtil.getSession();
+//		return session.get(ErsUsers.class, ersUsername);
+//	}
+//	
+//	public ErsUsers getByUsername2(String ersUsername) {
+//		Session session = HibernateUtil.getSession();
+//		Query q = session.createNativeQuery("SELECT * FROM ersUsers WHERE ers_username = ersUsername");
+//		List result = q.list();
+//		return q;
+//	}
 }

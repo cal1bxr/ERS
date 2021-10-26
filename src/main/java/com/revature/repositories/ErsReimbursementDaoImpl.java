@@ -8,6 +8,7 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import com.revature.models.ErsReimbursement;
+import com.revature.models.ErsUsers;
 import com.revature.utils.HibernateUtil;
 
 public class ErsReimbursementDaoImpl implements ErsReimbursementDAO {
@@ -16,6 +17,12 @@ public class ErsReimbursementDaoImpl implements ErsReimbursementDAO {
 	public List<ErsReimbursement> viewAllTickets() {
 		Session session = HibernateUtil.getSession();
 		return session.createQuery("FROM ErsReimbursement").list();
+//		for (ErsReimbursement r : reimbList) {
+//			ErsUsers ersUser = session.get(ErsUsers.class, r.getReimbAuthor());
+//			System.out.println(ersUser);
+//		}
+//		
+//		return reimbList;
 	}
 
 	@Override

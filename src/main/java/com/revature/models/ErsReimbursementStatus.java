@@ -1,8 +1,11 @@
 package com.revature.models;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import java.util.Objects;
 
@@ -10,10 +13,11 @@ import java.util.Objects;
 @Table(name="ers_reimbursment_status")
 public class ErsReimbursementStatus {
     @Id
-    @Column(name = "reimb_status_id")
+    @OneToMany(mappedBy="reimbStatusId", fetch=FetchType.LAZY, cascade=CascadeType.ALL)
+    @Column(name = "reimb_status_id", nullable=false)
     private int reimbStatusId;
     
-    @Column(name = "reimb_status")
+    @Column(name = "reimb_status", nullable=false)
     private String reimbStatus;
 
     public ErsReimbursementStatus(int reimbStatusId, String reimbStatus) {
