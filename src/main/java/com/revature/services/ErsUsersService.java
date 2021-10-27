@@ -3,7 +3,6 @@ package com.revature.services;
 import java.util.List;
 
 import com.revature.models.ErsUsers;
-import com.revature.models.User;
 import com.revature.models.UserDTO;
 import com.revature.repositories.ErsUsersDAO;
 import com.revature.repositories.ErsUsersDaoImpl;

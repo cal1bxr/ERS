@@ -1,6 +1,5 @@
 package com.revature.repositories;
 
-import java.sql.Timestamp;
 import java.util.List;
 
 import org.hibernate.HibernateException;
@@ -8,7 +7,6 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import com.revature.models.ErsReimbursement;
-import com.revature.models.ErsUsers;
 import com.revature.utils.HibernateUtil;
 
 public class ErsReimbursementDaoImpl implements ErsReimbursementDAO {

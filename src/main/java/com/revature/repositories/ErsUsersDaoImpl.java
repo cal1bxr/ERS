@@ -2,9 +2,6 @@ package com.revature.repositories;
 
 import java.util.List;
 
-import javax.persistence.Query;
-
-import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

@@ -1,6 +1,5 @@
 package com.revature.models;
 
-import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -14,8 +13,8 @@ import javax.persistence.Table;
 @Table(name="ers_user_roles")
 public class ErsUserRoles {
     @Id
-    @OneToMany(mappedBy="ersUserRoles", fetch=FetchType.LAZY, cascade=CascadeType.ALL)
-    @Column(name = "ers_role_id", nullable=false)
+//    @OneToMany(mappedBy="ersUserRoles", fetch=FetchType.LAZY, cascade=CascadeType.ALL)
+    @Column(name = "ers_role_id")
     private int userRoleId;
     
     @Column(name = "reimb_status_id", length=10, nullable=false)
@@ -50,14 +49,6 @@ public class ErsUserRoles {
 		this.userRole = userRole;
 	}
 
-//	public List<ErsUsers> getErsUsers() {
-//		return ersUsers;
-//	}
-
-//	public void setErsUsers(List<ErsUsers> ersUsers) {
-//		this.ersUsers = ersUsers;
-//	}
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -88,9 +79,8 @@ public class ErsUserRoles {
 
 	@Override
 	public String toString() {
-		return "ErsUserRoles [userRoleId=" + userRoleId + ", userRole=" + userRole + ", ersUsers=" + "]";
+		return "ErsUserRoles [userRoleId=" + userRoleId + ", userRole=" + userRole + "]";
 	}
-    
-    
 
+	
 }

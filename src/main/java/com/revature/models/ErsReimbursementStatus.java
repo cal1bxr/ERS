@@ -13,7 +13,7 @@ import java.util.Objects;
 @Table(name="ers_reimbursment_status")
 public class ErsReimbursementStatus {
     @Id
-    @OneToMany(mappedBy="reimbStatusId", fetch=FetchType.LAZY, cascade=CascadeType.ALL)
+//    @OneToMany(mappedBy="reimbStatusId", fetch=FetchType.LAZY, cascade=CascadeType.ALL)
     @Column(name = "reimb_status_id", nullable=false)
     private int reimbStatusId;
     
