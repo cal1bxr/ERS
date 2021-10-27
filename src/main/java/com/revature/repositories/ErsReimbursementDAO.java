@@ -1,8 +1,6 @@
 package com.revature.repositories;
 
 import com.revature.models.ErsReimbursement;
-import com.revature.models.ErsReimbursementStatus;
-import com.revature.models.ErsReimbursementType;
 
 import java.sql.Time;
 import java.sql.Timestamp;
@@ -20,6 +18,4 @@ public interface ErsReimbursementDAO {
     public boolean describeReimb(ErsReimbursement reimb);
 //    public byte[] uploadReceipt();
     public ErsReimbursement filterReimb(int reimbStatusId);
-    public boolean addReimbursementStatus(ErsReimbursementStatus reimb);
-    public boolean addReimbursementType(ErsReimbursementType reimb);
 }

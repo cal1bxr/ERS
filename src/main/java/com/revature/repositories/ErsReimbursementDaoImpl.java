@@ -8,8 +8,6 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import com.revature.models.ErsReimbursement;
-import com.revature.models.ErsReimbursementStatus;
-import com.revature.models.ErsReimbursementType;
 import com.revature.models.ErsUsers;
 import com.revature.utils.HibernateUtil;
 
@@ -104,33 +102,5 @@ public class ErsReimbursementDaoImpl implements ErsReimbursementDAO {
 	public ErsReimbursement filterReimb(int reimbStatusId) {
 		Session session = HibernateUtil.getSession();
 		return session.get(ErsReimbursement.class, reimbStatusId);
-	}
-
-	@Override
-	public boolean addReimbursementStatus(ErsReimbursementStatus reimb) {
-		try {
-			Session session = HibernateUtil.getSession();
-			Transaction tx = session.beginTransaction();
-			session.save(reimb);
-			tx.commit();
-			HibernateUtil.closeSession();
-			return true;
-		} catch (HibernateException e) {
-			return false;
-		}
-	}
-
-	@Override
-	public boolean addReimbursementType(ErsReimbursementType reimb) {
-		try {
-			Session session = HibernateUtil.getSession();
-			Transaction tx = session.beginTransaction();
-			session.save(reimb);
-			tx.commit();
-			HibernateUtil.closeSession();
-			return true;
-		} catch (HibernateException e) {
-			return false;
-		}
 	}
 }

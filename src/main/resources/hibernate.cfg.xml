@@ -25,7 +25,7 @@
         <mapping class="com.revature.models.ErsUsers" />
         <mapping class="com.revature.models.ErsReimbursement" />
         <mapping class="com.revature.models.ErsUserRoles" />
-        <mapping class="com.revature.models.ErsReimbursementType" />
+        <mapping class="com.revature.models.ErsReimbursmentType" />
         <mapping class="com.revature.models.ErsReimbursementStatus" />
         
     </session-factory>

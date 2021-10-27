@@ -11,8 +11,6 @@ import com.revature.models.ErsUserRoles;
 import com.revature.models.ErsUsers;
 import com.revature.repositories.ErsReimbursementDAO;
 import com.revature.repositories.ErsReimbursementDaoImpl;
-import com.revature.repositories.ErsUsersDAO;
-import com.revature.repositories.ErsUsersDaoImpl;
 
 import io.javalin.Javalin;
 import io.javalin.http.staticfiles.Location;
@@ -24,21 +22,13 @@ public class App {
 	public static void main(String[] args) {
 		
 		ErsReimbursementDAO reimbDao = new ErsReimbursementDaoImpl();
-		ErsUsersDAO ersUserDao = new ErsUsersDaoImpl();
 		
-		ErsUsers ersUser = new ErsUsers("mjordan", "Password", "Matt", "Jordan", "mjordan@mjordan", 1, null);
-		ErsUserRoles ersUserRoles = new ErsUserRoles(1, "Admin", null);
-		ErsReimbursementType ersReimbursementType = new ErsReimbursementType(1, "LODGING", null);
-		ErsReimbursementStatus ersReimbursementStatus = new ErsReimbursementStatus(1, "APPROVED", null);
-		ErsReimbursement ersReimbursement = new ErsReimbursement(500.00, null, null, null, 1, 1, null, null, null);
+		ErsUsers ersUser = new ErsUsers("mjordan", "Password", "Matt", "Jordan", "mjordan@mjordan", 1);
+		ErsUserRoles ersUserRoles = new ErsUserRoles(1, "Admin");
+		ErsReimbursementType ersReimbursementType = new ErsReimbursementType(1, "LODGING");
+		ErsReimbursementStatus ersReimbursementStatus = new ErsReimbursementStatus(1, "APPROVED");
+		ErsReimbursement ersReimbursement = new ErsReimbursement(500.00, null, null, null, 1, 1, 1, 1);
 		
-
-		ersUserDao.addErsUserRoles(ersUserRoles);
-		reimbDao.addReimbursementStatus(ersReimbursementStatus);
-		reimbDao.addReimbursementType(ersReimbursementType);
-		ersUserDao.addErsUser(ersUser);
-		reimbDao.addReimbursement(ersReimbursement);
-
 		
 		
 		
