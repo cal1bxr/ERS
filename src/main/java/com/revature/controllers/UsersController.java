@@ -25,7 +25,7 @@ public class UsersController implements Controller{
 	
 	public Handler getUser = (ctx) -> {
 		if(ctx.req.getSession(false) != null) {
-			ErsUsers user = userService.getUserById(Integer.parseInt(ctx.pathParam("ers_users_id")));
+			ErsUsers user = userService.getUserById(Integer.parseInt(ctx.pathParam("ersuserid")));
 			ctx.json(user);
 			ctx.status(200);
 		} else {

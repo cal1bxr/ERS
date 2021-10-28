@@ -11,14 +11,11 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="ers_reimbursment_type")
 public class ErsReimbursementType {
     @Id
-//    @OneToMany(mappedBy="reimbTypeId", fetch=FetchType.LAZY, cascade=CascadeType.ALL)
-    @Column(name = "reimb_type_id", nullable=false)
     private int reimbTypeId;
     
-    @Column(name = "reimb_type", length=10, nullable=false)
+    @Column(nullable=false)
     private String reimbType;
 
     public ErsReimbursementType(int reimbTypeId, String reimbType) {

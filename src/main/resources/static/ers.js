@@ -58,7 +58,7 @@ function populateReimbsTable(data) {
 
         for (let cell in reimb) {
             let td = document.createElement("td");
-            if (cell != "home") {
+            if (cell != "user") {
                 td.innerText = reimb[cell];
             } else if (reimb[cell]) {
                 td.innerText = `${reimb[cell].reimbId}: ${reimb[cell].reimbAmount}, ${reimb[cell].reimbSubmitted}, ${reimb[cell].reimbResolved}, ${reimb[cell].reimbDescr}, ${reimb[cell].reimbAuthor}, ${reimb[cell].reimbResolver}, ${reimb[cell].reimbStatus}, ${reimb[cell].reimbType}`
@@ -70,31 +70,23 @@ function populateReimbsTable(data) {
 }
 
 function getNewReimb() {
-    let newReimbId = document.getElementById("username").value;
-    let newReimbAmount = document.getElementById("firstName").value;
-    let newReimbSubmitted = document.getElementById("LastName").value;
-    let newReimbResolved = document.getElementById("email").value;
-    let newReimbDescr = document.getElementById("roleId").value;
+    let newReimbAmount = document.getElementById("reimbursementAmount").value;
+    // let newReimbDescr = document.getElementById("roleId").value;
     // let newReimbReceipt = document.getElementById().value;
-    let newReimbAuthor = document.getElementById("reimbursementAuthor").value;
-    let newReimbResolver = document.getElementById("reimbursementAuthor").value;
-    let newReimbStatus = document.getElementById("reimbursementStatus").value;
-    let newReimbType = document.getElementById("reimbursementType").value;
+    // let newReimbType = document.getElementById("reimbursementType").value;
 
 
-    let user = {
-        reimbId: newReimbId,
-        reimbamount: newReimbAmount,
-        reimbSubmitted: newReimbSubmitted,
-        reimbResolved: newReimbResolved,
-        reimbDescr: newReimbDescr,
-        reimbAuthor: newReimbAuthor,
-        reimbResolver: newReimbResolver,
-        reimbStatus: newReimbStatus,
-        reimbType: newReimbType
+    let reimb = {
+
+        reimbAmount: newReimbAmount
+ 
+ 
+        // reimbDescr: newReimbDescr,
+
+        // reimbType: newReimbType
     }
 
-    return user;
+    return reimb;
 }
 
 async function addReimb() {
@@ -118,6 +110,7 @@ async function getAllUsers() {
     let response = await fetch(URL + "ersUsers", { credentials: "include" });
     if (response.status === 200) {
         let data = await response.json();
+        console.log(data);
         populateUsersTable(data);
     } else {
         console.log("Users not available.");

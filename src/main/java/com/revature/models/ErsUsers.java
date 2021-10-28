@@ -13,30 +13,28 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="ers_users")
 public class ErsUsers {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ers_users_id", nullable=false)
     private int ersUsersId;
     
-    @Column(name = "ers_username", length=50, nullable=false)
+    @Column(nullable=false)
     private String ersUsername;
     
-    @Column(name = "ers_password", length=50, nullable=false)
+    @Column(nullable=false)
     private String ersPassword;
     
-    @Column(name = "ers_first_name", length=100, nullable=false)
+    @Column(nullable=false)
     private String ersFirstName;
     
-    @Column(name = "ers_last_name", length=100, nullable=false)
+    @Column(nullable=false)
     private String ersLastName;
     
-    @Column(name = "ers_email", length=150, nullable=false)
+    @Column(nullable=false)
     private String ersEmail;
-    
+        
     @ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
-    @JoinColumn(name = "userRoleId")
+    @JoinColumn(name = "userRoleId", updatable=false, insertable=false)
     private ErsUserRoles ersUserRole;
 
 	public ErsUsers(int ersUsersId, String ersUsername, String ersPassword, String ersFirstName, String ersLastName,
@@ -187,6 +185,5 @@ public class ErsUsers {
 				+ ", ersUserRole=" + ersUserRole + "]";
 	}
 
-	
-	
+    
 }

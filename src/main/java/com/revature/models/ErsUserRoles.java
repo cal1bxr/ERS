@@ -10,18 +10,13 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="ers_user_roles")
 public class ErsUserRoles {
     @Id
-//    @OneToMany(mappedBy="ersUserRoles", fetch=FetchType.LAZY, cascade=CascadeType.ALL)
-    @Column(name = "ers_role_id")
     private int userRoleId;
     
-    @Column(name = "reimb_status_id", length=10, nullable=false)
+    @Column(length=10, nullable=false)
     private String userRole;
     
-//    List<ErsUsers> ersUsers;
-
 	public ErsUserRoles(int userRoleId, String userRole) {
 		super();
 		this.userRoleId = userRoleId;

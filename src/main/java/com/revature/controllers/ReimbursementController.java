@@ -25,7 +25,7 @@ public class ReimbursementController implements Controller{
 //	public Handler getPastTickets = (ctx) -> {
 //		if (ctx.req.getSession(false) != null) {
 //			try {
-//				int id = Integer.parseInt(ctx.pathParam("ers_user_id"));
+//				int id = Integer.parseInt(ctx.pathParam("ersuserid"));
 //				ErsReimbursement reimb = reimbService.getPastTickets(id);
 //				ctx.json(reimb);
 //				ctx.status(200);
