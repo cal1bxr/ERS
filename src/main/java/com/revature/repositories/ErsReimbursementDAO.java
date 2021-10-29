@@ -2,17 +2,19 @@ package com.revature.repositories;
 
 import com.revature.models.ErsReimbursement;
 
+import CurrentlyUnused.ErsReimb;
+import CurrentlyUnused.ErsReimb.ReimbStatus;
+
+import java.sql.Timestamp;
 import java.util.List;
 
 public interface ErsReimbursementDAO {
-	public ErsReimbursement findById(int id);
-    public boolean addReimbursement(ErsReimbursement reimb);
-//    public ErsReimbursement viewPastReimbursement(int ersUsersId);
-    public List<ErsReimbursement> viewAllTickets();
-    public boolean updateReimb(ErsReimbursement reimb);
-//    public Timestamp submitReimb();
-//    public Timestamp resolveReimb();
-    public boolean describeReimb(ErsReimbursement reimb);
-//    public byte[] uploadReceipt();
-    public ErsReimbursement filterReimb(int reimbStatusId);
+	List<ErsReimbursement> viewAllTickets();
+	List<ErsReimbursement> viewPastTickets(int ersUserId);
+	List<ErsReimbursement> getReimbByStatus(int status);
+	ErsReimbursement viewPastReimbursement(int ersUsersId);
+	ErsReimbursement findById(int reimbId);
+    boolean addReimbursement(ErsReimbursement reimb);
+    boolean updateReimbursement(ErsReimbursement reimb);
+//    public Timestamp resolveReimb()
 }

@@ -13,13 +13,13 @@ import javax.persistence.Table;
 @Entity
 public class ErsReimbursementType {
     @Id
-    private int reimbTypeId;
+    private int reimbTyId;
     
     @Column(nullable=false)
     private String reimbType;
 
     public ErsReimbursementType(int reimbTypeId, String reimbType) {
-        this.reimbTypeId = reimbTypeId;
+        this.reimbTyId = reimbTypeId;
         this.reimbType = reimbType;
     }
 
@@ -27,11 +27,11 @@ public class ErsReimbursementType {
     }
 
     public int getReimbTypeId() {
-        return reimbTypeId;
+        return reimbTyId;
     }
 
     public void setReimbTypeId(int reimbTypeId) {
-        this.reimbTypeId = reimbTypeId;
+        this.reimbTyId = reimbTypeId;
     }
 
     public String getReimbType() {
@@ -47,18 +47,18 @@ public class ErsReimbursementType {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         ErsReimbursementType that = (ErsReimbursementType) o;
-        return reimbTypeId == that.reimbTypeId && Objects.equals(reimbType, that.reimbType);
+        return reimbTyId == that.reimbTyId && Objects.equals(reimbType, that.reimbType);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(reimbTypeId, reimbType);
+        return Objects.hash(reimbTyId, reimbType);
     }
 
     @Override
     public String toString() {
         return "ErsReimbursementType{" +
-                "reimbTypeId=" + reimbTypeId +
+                "reimbTypeId=" + reimbTyId +
                 ", reimbType='" + reimbType + '\'' +
                 '}';
     }

@@ -5,6 +5,7 @@ import java.util.List;
 import com.revature.models.ErsUsers;
 import com.revature.services.ErsUsersService;
 
+import CurrentlyUnused.ErsUser;
 import io.javalin.Javalin;
 import io.javalin.http.Handler;
 
@@ -25,13 +26,43 @@ public class UsersController implements Controller{
 	
 	public Handler getUser = (ctx) -> {
 		if(ctx.req.getSession(false) != null) {
-			ErsUsers user = userService.getUserById(Integer.parseInt(ctx.pathParam("ersuserid")));
+			List<ErsUsers> ersUser = userService.getUserById(Integer.parseInt(ctx.pathParam("ersUserId")));
+			ctx.json(ersUser);
+			ctx.status(200);
+		} else {
+			ctx.status(401);
+		}
+	};
+	
+	public Handler getUserByEmail = (ctx) -> {
+		if(ctx.req.getSession(false) != null) {
+			ErsUsers ersUser = userService.getUserByEmail("ersEmail");
+			ctx.json(ersUser);
+			ctx.status(200);
+		} else {
+			ctx.status(401);
+		}
+	};
+	
+	public Handler getUserPassword = (ctx) -> {
+		if(ctx.req.getSession(false) != null) {
+			ErsUsers user = userService.getUserPass(Integer.parseInt(ctx.pathParam("ersPassword")));
 			ctx.json(user);
 			ctx.status(200);
 		} else {
 			ctx.status(401);
 		}
 	};
+	
+	public Handler addUser = (ctx) -> {
+		ErsUsers ersUser = ctx.bodyAsClass(ErsUsers.class);
+		if (userService.addUser(ersUser)) {
+			ctx.status(201);
+		} else {
+			ctx.status(400);
+		}
+	};
+
 	
 	public Handler login = (ctx) -> {
 		

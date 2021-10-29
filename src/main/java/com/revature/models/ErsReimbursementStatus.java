@@ -1,24 +1,20 @@
 package com.revature.models;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
 import java.util.Objects;
 
 @Entity
 public class ErsReimbursementStatus {
     @Id
-    private int reimbStatusId;
+    private int reimbStatId;
     
     @Column(nullable=false)
     private String reimbStatus;
 
     public ErsReimbursementStatus(int reimbStatusId, String reimbStatus) {
-        this.reimbStatusId = reimbStatusId;
+        this.reimbStatId = reimbStatusId;
         this.reimbStatus = reimbStatus;
     }
 
@@ -26,11 +22,11 @@ public class ErsReimbursementStatus {
     }
 
     public int getReimbStatusId() {
-        return reimbStatusId;
+        return reimbStatId;
     }
 
     public void setReimbStatusId(int reimbStatusId) {
-        this.reimbStatusId = reimbStatusId;
+        this.reimbStatId = reimbStatusId;
     }
 
     public String getReimbStatus() {
@@ -46,18 +42,18 @@ public class ErsReimbursementStatus {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         ErsReimbursementStatus that = (ErsReimbursementStatus) o;
-        return reimbStatusId == that.reimbStatusId && Objects.equals(reimbStatus, that.reimbStatus);
+        return reimbStatId == that.reimbStatId && Objects.equals(reimbStatus, that.reimbStatus);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(reimbStatusId, reimbStatus);
+        return Objects.hash(reimbStatId, reimbStatus);
     }
 
     @Override
     public String toString() {
         return "ErsReimbursmentStatus{" +
-                "reimbStatusId=" + reimbStatusId +
+                "reimbStatusId=" + reimbStatId +
                 ", reimbStatus='" + reimbStatus + '\'' +
                 '}';
     }

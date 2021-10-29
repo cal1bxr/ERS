@@ -20,35 +20,34 @@ import javax.persistence.Table;
 public class ErsReimbursement {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "reimb_id", nullable=false)
+    @Column(name = "reimb_Id", nullable=false)
     private int reimbId;
     
-//    @Column(nullable=false)
+    @Column(nullable=false)
     private double reimbAmount;
     
-//    @Column(nullable=false)
+    @Column(nullable=false)
     private Timestamp reimbSubmitted;
     
-//    @Column(nullable=false)
     private Timestamp reimbResolved;
     
     @Lob
     private byte[] reimbReceipt;
     
     @ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
-    @JoinColumn(name = "ersUsersId")
+    @JoinColumn(name="ersUsersId")
     private ErsUsers reimbAuthor;
     
     @ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
-    @JoinColumn(name = "ersUsersId", updatable=false, insertable=false)
+    @JoinColumn(name="ersUsersId", insertable=false, updatable=false)
     private ErsUsers reimbResolver;
     
     @ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
-    @JoinColumn(name= "reimbStatusId")
+    @JoinColumn(name= "reimbStatId")
     private ErsReimbursementStatus reimbStatusId;
     
     @ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
-    @JoinColumn(name="reimbTypeId")
+    @JoinColumn(name="reimbTyId")
     private ErsReimbursementType reimbTypeId;
 
 	public ErsReimbursement(int reimbId, double reimbAmount, Timestamp reimbSubmitted, Timestamp reimbResolved,

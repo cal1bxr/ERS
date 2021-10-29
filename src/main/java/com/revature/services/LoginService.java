@@ -9,7 +9,7 @@ public class LoginService {
 	
 	public boolean login(UserDTO userDto) {
 		User user = userDao.getByUsername(userDto.username);
-		if (user != null && (userDto.password.hashCode() == user.getPassword())) {
+		if (user != null && (userDto.password.equals(user.getPassword()))) {
 			return true;
 		}
 

@@ -34,7 +34,7 @@ public class ErsUsers {
     private String ersEmail;
         
     @ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
-    @JoinColumn(name = "userRoleId", updatable=false, insertable=false)
+    @JoinColumn(name = "userRoleId")
     private ErsUserRoles ersUserRole;
 
 	public ErsUsers(int ersUsersId, String ersUsername, String ersPassword, String ersFirstName, String ersLastName,

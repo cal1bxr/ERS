@@ -7,6 +7,8 @@ import com.revature.models.UserDTO;
 import com.revature.repositories.ErsUsersDAO;
 import com.revature.repositories.ErsUsersDaoImpl;
 
+import CurrentlyUnused.ErsUser;
+
 public class ErsUsersService {
 
 		private ErsUsersDAO usersDao = new ErsUsersDaoImpl();
@@ -15,13 +17,30 @@ public class ErsUsersService {
 			return usersDao.getAllUsers();
 		}
 		
-		public ErsUsers getUserById(int ersUsersId) {
-			ErsUsers user = usersDao.getUser(ersUsersId);
+		public List<ErsUsers> getUserById(int ersUsersId) {
+			List<ErsUsers> user = usersDao.getUserId(ersUsersId);
+			if(user != null) {
+				return user;
+			} else {
+				return null;
+			}
+		}
+		
+		public ErsUsers getUserByEmail(String ersEmail) {
+			ErsUsers user = usersDao.getUserByEmail(ersEmail);
 			if(user != null) {
 				return user;
 			} else {
 				return new ErsUsers();
 			}
+		}
+		
+		public ErsUsers getUserPass(int ersUsersId) {
+			return usersDao.getPassword(ersUsersId);	
+		}
+		
+		public boolean addUser(ErsUsers user){
+			return usersDao.addUser(user);
 		}
 		
 		public boolean login(UserDTO userDto) {

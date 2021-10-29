@@ -2,8 +2,12 @@ package com.revature.services;
 
 import java.util.List;
 
-import com.revature.models.ErsReimbursement;
 import com.revature.repositories.ErsReimbursementDaoImpl;
+
+import CurrentlyUnused.ErsReimb;
+import CurrentlyUnused.ErsReimb.ReimbStatus;
+
+import com.revature.models.ErsReimbursement;
 import com.revature.repositories.ErsReimbursementDAO;
 
 public class ErsReimbursementService {
@@ -13,7 +17,25 @@ public class ErsReimbursementService {
 		return reimbDao.viewAllTickets();
 	}
 	
-	public ErsReimbursement getReimb(int id) {
+	public List<ErsReimbursement> filterErsReimbursement(ReimbStatus status) {
+		List<ErsReimbursement> reimb = reimbDao.getReimbByStatus(status);
+		if (reimb != null) {
+			return reimb;
+		} else {
+			return null;
+		}
+	}
+	
+	public ErsReimbursement getPastTickets(int ersUsersId) {
+		ErsReimbursement reimb = reimbDao.viewPastReimbursement(ersUsersId);
+		if (reimb != null) {
+			return reimb;
+		} else {
+			return new ErsReimbursement();
+		}
+	}
+	
+	public ErsReimbursement getReimbursement(int id) {
 		ErsReimbursement reimb = reimbDao.findById(id);
 		if (reimb != null) {
 			return reimb;
@@ -22,38 +44,12 @@ public class ErsReimbursementService {
 		}
 	}
 
-//	public ErsReimbursement getPastTickets(int ersUsersId) {
-//		ErsReimbursement reimb = reimbDao.viewPastReimbursement(ersUsersId);
-//		if (reimb != null) {
-//			return reimb;
-//		} else {
-//			return new ErsReimbursement();
-//		}
-//	}
-	
 	public boolean addErsReimbursement(ErsReimbursement reimb) {
 		return reimbDao.addReimbursement(reimb);
 	}
 	
 	public boolean updateErsReimbursement(ErsReimbursement reimb) {
-		return reimbDao.updateReimb(reimb);
+		return reimbDao.updateReimbursement(reimb);
 	}
-	
-	public boolean describeErsReimbrusement(ErsReimbursement reimb) {
-		return reimbDao.describeReimb(reimb);
-	}
-	
-//	public byte[] uploadReimb() {
-//		return reimbDao.uploadReceipt();
-//	}
-	
-//	public ErsReimbursement filterErsReimbursement(int reimbStatusId) {
-//		ErsReimbursement reimb = reimbDao.viewPastReimbursement(reimbStatusId);
-//		if (reimb != null) {
-//			return reimb;
-//		} else {
-//			return new ErsReimbursement();
-//		}
-//	}
-//	
+
 }

@@ -43,6 +43,7 @@ async function getAllReimbs() {
     if (response.status === 200) {
         let data = await response.json();
         populateReimbsTable(data);
+        console.log(data);
     } else {
         console.log("There are no reimbs to show");
     }
@@ -50,19 +51,23 @@ async function getAllReimbs() {
 
 function populateReimbsTable(data) {
     let tbody = document.getElementById("reimbursementBody");
+    
 
     tbody.innerHTML = "";
 
     for (let reimb of data) {
         let row = document.createElement("tr");
+        timeStamp = new Date();
+        console.log(timeStamp);
 
         for (let cell in reimb) {
             let td = document.createElement("td");
-            if (cell != "user") {
+            if (cell != "reimbAuthor") {
                 td.innerText = reimb[cell];
             } else if (reimb[cell]) {
-                td.innerText = `${reimb[cell].reimbId}: ${reimb[cell].reimbAmount}, ${reimb[cell].reimbSubmitted}, ${reimb[cell].reimbResolved}, ${reimb[cell].reimbDescr}, ${reimb[cell].reimbAuthor}, ${reimb[cell].reimbResolver}, ${reimb[cell].reimbStatus}, ${reimb[cell].reimbType}`
+                // td.innerText = `${userId[0].reimbAuthor}`;
             }
+        
             row.appendChild(td);
         }
         tbody.appendChild(row);
@@ -71,26 +76,44 @@ function populateReimbsTable(data) {
 
 function getNewReimb() {
     let newReimbAmount = document.getElementById("reimbursementAmount").value;
-    // let newReimbDescr = document.getElementById("roleId").value;
+    let newReimbSubmitted = new Date();
+    // let newReimbDescr = document.getElementById("reimbursementDescription");
+    // let newReimbAuthor = document.getElementById("reimbursementAuthor").value;
     // let newReimbReceipt = document.getElementById().value;
-    // let newReimbType = document.getElementById("reimbursementType").value;
-
-
+    let newReimbType = document.getElementById("reimbursementType").value;
+    let newUser = {
+        userId: '1',
+        username : 'mjordan',
+        password : 'Password',
+        firstName : 'Matt',
+        lastName : 'Jordan',
+        email : 'mjorda@mjordan',
+        userRoleId : 'ADMIN'
+    }
     let reimb = {
 
-        reimbAmount: newReimbAmount
- 
+        reimbAmount: newReimbAmount,
+        reimbsubmitted: newReimbSubmitted,
+        // reimbDescription: newReimbDescr,
+        // reimbAuthor : JSON.stringify(newUser.userId),
+        reimbstatusId : {
+            reimbstatid: '1',
+            reimbstatus: 'APPROVED'
+        },
+        reimbstatusType : newReimbType
+        
  
         // reimbDescr: newReimbDescr,
 
         // reimbType: newReimbType
     }
-
     return reimb;
+
 }
 
 async function addReimb() {
     let reimb = getNewReimb();
+    console.log(reimb);
 
     let response = await fetch(URL + "reimbs", {
         method: 'POST',
@@ -126,16 +149,19 @@ function populateUsersTable(data) {
         let row = document.createElement("tr");
         for (let cell in user) {
             let td = document.createElement("td");
-            td.innerText = user[cell];
-            // td.innerText = `${user[cell].name}: ${user[cell].userFirstName}, ${user[cell].userLastName}, ${user[cell].userEmail}, ${user[cell].userRoleId}`;
-
+            if (cell != "ersUserRole") {
+                td.innerText = user[cell];
+                // td.innerText = `${user.ersUsersId}: ${user.ersUsername}, ${user.ersFirstName}, ${user.ersLastName}, ${user.ersEmail}`;
+            } else if (user[cell]) {
+                td.innerText = `${user[cell].userRole}`;
+            }
             row.appendChild(td);
         }
         tbody.appendChild(row);
     }
 }
 
-function getNewHome() {
+function getNewUser() {
     let newName = document.getElementById("homeName").value;
     let newStreetNum = document.getElementById("homeStreetNum").value;
     let newStreetName = document.getElementById("homeStreetName").value;
