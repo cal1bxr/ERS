@@ -22,7 +22,7 @@ public class ErsUsers {
     private String ersUsername;
     
     @Column(nullable=false)
-    private String ersPassword;
+    private int ersPassword;
     
     @Column(nullable=false)
     private String ersFirstName;
@@ -37,7 +37,7 @@ public class ErsUsers {
     @JoinColumn(name = "userRoleId")
     private ErsUserRoles ersUserRole;
 
-	public ErsUsers(int ersUsersId, String ersUsername, String ersPassword, String ersFirstName, String ersLastName,
+	public ErsUsers(int ersUsersId, String ersUsername, int ersPassword, String ersFirstName, String ersLastName,
 			String ersEmail, ErsUserRoles ersUserRole) {
 		super();
 		this.ersUsersId = ersUsersId;
@@ -49,7 +49,7 @@ public class ErsUsers {
 		this.ersUserRole = ersUserRole;
 	}
 
-	public ErsUsers(String ersUsername, String ersPassword, String ersFirstName, String ersLastName, String ersEmail,
+	public ErsUsers(String ersUsername, int ersPassword, String ersFirstName, String ersLastName, String ersEmail,
 			ErsUserRoles ersUserRole) {
 		super();
 		this.ersUsername = ersUsername;
@@ -80,11 +80,11 @@ public class ErsUsers {
 		this.ersUsername = ersUsername;
 	}
 
-	public String getErsPassword() {
+	public int getErsPassword() {
 		return ersPassword;
 	}
 
-	public void setErsPassword(String ersPassword) {
+	public void setErsPassword(int ersPassword) {
 		this.ersPassword = ersPassword;
 	}
 
@@ -127,7 +127,7 @@ public class ErsUsers {
 		result = prime * result + ((ersEmail == null) ? 0 : ersEmail.hashCode());
 		result = prime * result + ((ersFirstName == null) ? 0 : ersFirstName.hashCode());
 		result = prime * result + ((ersLastName == null) ? 0 : ersLastName.hashCode());
-		result = prime * result + ((ersPassword == null) ? 0 : ersPassword.hashCode());
+		result = prime * result + ersPassword;
 		result = prime * result + ((ersUserRole == null) ? 0 : ersUserRole.hashCode());
 		result = prime * result + ((ersUsername == null) ? 0 : ersUsername.hashCode());
 		result = prime * result + ersUsersId;
@@ -158,10 +158,7 @@ public class ErsUsers {
 				return false;
 		} else if (!ersLastName.equals(other.ersLastName))
 			return false;
-		if (ersPassword == null) {
-			if (other.ersPassword != null)
-				return false;
-		} else if (!ersPassword.equals(other.ersPassword))
+		if (ersPassword != other.ersPassword)
 			return false;
 		if (ersUserRole == null) {
 			if (other.ersUserRole != null)
@@ -185,5 +182,5 @@ public class ErsUsers {
 				+ ", ersUserRole=" + ersUserRole + "]";
 	}
 
-    
+
 }

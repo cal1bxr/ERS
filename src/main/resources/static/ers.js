@@ -6,6 +6,50 @@ let userButton = document.createElement("button");
 let addReimbButton = document.getElementById("addReimbButton");
 let loginButton = document.getElementById('loginButton');
 
+const typeFood= {
+    reimbTyId: '2',
+    reimbType: 'FOOD'
+}
+const typeLodging= {
+    reimbTyId: '1',
+    reimbType: 'LODGING'
+}
+const typeTravel= {
+    reimbTyId: '3',
+    reimbType: 'TRAVEL'
+}
+const typeOther= {
+    reimbTyId: '4',
+    reimbType: 'OTHER'
+}
+
+const reimbStatusPending = {
+    'reimbStatus': 'PENDING',
+    'reimbStatusId': '2'
+}
+
+const reimbStatusApproved = {
+    'reimbStatus': 'APPROVED',
+    'reimbStatusId': '1'
+}
+
+const reimbStatusDenied = {
+    'reimbStatus': 'DENIED',
+    'reimbStatusId': '3'
+}
+
+let newReimbSubmitted = new Date();
+let newReimbResovled = new Date();
+// let reimbAuthor = retrievedUser;
+// let reimbAuthor = retrievedUser;
+
+/*
+When user logins in
+Run getuser by username that was inserted into login
+store JSON from that call in variable
+*/
+
+
 reimbButton.onclick = getAllReimbs;
 userButton.onclick = getAllUsers;
 addReimbButton.onclick = addReimb;

@@ -4,17 +4,17 @@ public class User {
 
 		@SuppressWarnings("unused")
 		private String username;
-		private String password;
+		private int password;
 		@SuppressWarnings("unused")
 		private String role;
 		
-		public User(String username, String password, String role) {
+		public User(String username, int password, String role) {
 			super();
 			this.username = username;
 			this.password = password;
 			this.role = role;
 		}
-		public String getPassword() {
+		public int getPassword() {
 			return password;
 		}		
 }

@@ -11,7 +11,7 @@ import java.util.List;
 public interface ErsReimbursementDAO {
 	List<ErsReimbursement> viewAllTickets();
 	List<ErsReimbursement> viewPastTickets(int ersUserId);
-	List<ErsReimbursement> getReimbByStatus(int status);
+	List<ErsReimbursement> getReimbByStatus(ErsReimbursement status);
 	ErsReimbursement viewPastReimbursement(int ersUsersId);
 	ErsReimbursement findById(int reimbId);
     boolean addReimbursement(ErsReimbursement reimb);

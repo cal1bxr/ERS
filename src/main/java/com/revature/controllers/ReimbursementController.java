@@ -92,12 +92,7 @@ public class ReimbursementController implements Controller{
 	}
 }
 
-/* "FROM User Hwere usermane '" + username + '").list
- * 
- * 
- * 
- */
-	
+
 	
 
 

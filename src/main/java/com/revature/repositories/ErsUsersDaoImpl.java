@@ -70,4 +70,12 @@ public class ErsUsersDaoImpl implements ErsUsersDAO {
 			return false;
 			}
 	}
+
+	@Override
+	public ErsUsers getUsername(String username) {
+		Session session = HibernateUtil.getSession();
+		List<ErsUsers> list = session.createQuery(" FROM ErsUsers WHERE username = '" + username + "'").list();
+	    ErsUsers user = list.get(0);
+	    return user;	
+	}
 }

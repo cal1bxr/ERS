@@ -33,7 +33,7 @@ public class ErsReimbursementDaoImpl implements ErsReimbursementDAO {
 	}
 
 	@Override
-	public List<ErsReimbursement> getReimbByStatus(int status) {
+	public List<ErsReimbursement> getReimbByStatus(ErsReimbursement status) {
 		Session session = HibernateUtil.getSession();
 		return session.createQuery("FROM Ers_Reimbursement WHERE Reimb_StatId = " + status).list();
 	}
