@@ -14,6 +14,7 @@ public interface ErsUsersDAO {
 	ErsUsers getPassword(int id);
 	ErsUsers getUserRole(int ersUserId);
 	boolean addUser(ErsUsers ersUser);
+	public ErsUsers getUsername (String username);
 
 	
 	

@@ -34,11 +34,11 @@ public class ErsReimbursement {
     @Lob
     private byte[] reimbReceipt;
     
-    @ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
+    @ManyToOne(fetch=FetchType.EAGER)
     @JoinColumn(name="ersUsersId")
     private ErsUsers reimbAuthor;
     
-    @ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
+    @ManyToOne(fetch=FetchType.EAGER)
     @JoinColumn(name="ersUsersId", insertable=false, updatable=false)
     private ErsUsers reimbResolver;
     

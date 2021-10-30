@@ -2,7 +2,7 @@ package com.revature.repositories;
 
 import java.util.List;
 
-import javax.persistence.Query;
+import org.hibernate.Query;
 
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
@@ -10,6 +10,7 @@ import org.hibernate.Transaction;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.revature.models.ErsReimbursement;
 import com.revature.models.ErsUsers;
 import com.revature.utils.HibernateUtil;
 
@@ -26,6 +27,16 @@ public class ErsUsersDaoImpl implements ErsUsersDAO {
 	public List<ErsUsers> getUserId(int ersUsersId) {
 		Session session = HibernateUtil.getSession();
 		return session.createQuery("FROM ErsUsers WHERE ErsUsers.ersUserId = " + ersUsersId).list();
+	}
+	
+	@Override
+	public ErsUsers getUsername (String ersUsername){
+		Session session = HibernateUtil.getSession();
+		Query q = session.createQuery("FROM ErsUsers WHERE ersUsername= :ersUsername" );
+		q.setParameter("ersUsername", ersUsername);
+		List<ErsUsers> list = q.list();
+		ErsUsers users = list.get(0);
+		return users;
 	}
 
 	@Override

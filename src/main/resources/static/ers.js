@@ -5,11 +5,14 @@ let reimbButton = document.createElement("button");
 let userButton = document.createElement("button");
 let addReimbButton = document.getElementById("addReimbButton");
 let loginButton = document.getElementById('loginButton');
+let getUserButton = document.getElementById('getUserNameButton')
 
 reimbButton.onclick = getAllReimbs;
 userButton.onclick = getAllUsers;
 addReimbButton.onclick = addReimb;
 loginButton.onclick = loginToApp;
+getUserButton.onclick = getUsername;
+
 
 reimbButton.innerText = "See All Reimbursements";
 userButton.innerText = "See All Users";
@@ -65,7 +68,7 @@ function populateReimbsTable(data) {
             if (cell != "reimbAuthor") {
                 td.innerText = reimb[cell];
             } else if (reimb[cell]) {
-                // td.innerText = `${userId[0].reimbAuthor}`;
+                // td.innerText = `${reimb[cell].reimbResolver[0].ersUsername}`;
             }
         
             row.appendChild(td);
@@ -75,41 +78,95 @@ function populateReimbsTable(data) {
 }
 
 function getNewReimb() {
+    let newAuthor = JSON.parse(sessionStorage.user);
+    console.log(newAuthor);
+    let reimbStatusPending ={
+        'reimbStatus': 'PENDING',
+        'reimbStatusId' : '1'
+    };
+    let reimbStatusApproved ={
+        'reimbStatus': 'APPROVED',
+        'reimbStatusId' : '2'
+    };
+    let reimbStatusDenied ={
+        'reimbStatus': 'DENIED',
+        'reimbStatusId' : '3'
+    };
+    let reimbTypeLodging = {
+        'reimbTypeId': '1',
+        'reimbType': 'LODGING'
+    };
+    let reimbTypeFood = {
+        'reimbTypeId': '2',
+        'reimbType': 'FOOD'
+    };
+    let reimbTypeTravel = {
+        'reimbTypeId': '3',
+        'reimbType': 'TRAVEL'
+    };
+    let reimbTypeOther = {
+        'reimbTypeId': '4',
+        'reimbType': 'OTHER'
+    };
+    
+   
+    // let newAuthor = {
+    //     "ersUsersId" : "5",
+    //     "ersUsername": "mjon",
+    //     "ersPassword": "password",
+    //     "ersFirstName": "Matt",
+    //     "ersLastName": "Jordan",
+    //     "ersEmail": "m@mjordan",
+    //     "ersUserRole": {
+    //         "userRoleId": 1,
+    //         "userRole": "ADMIN"
+    //     }
+    // };
+
     let newReimbAmount = document.getElementById("reimbursementAmount").value;
     let newReimbSubmitted = new Date();
+    // let newReimbAuthor = newAuthor;
     // let newReimbDescr = document.getElementById("reimbursementDescription");
     // let newReimbAuthor = document.getElementById("reimbursementAuthor").value;
     // let newReimbReceipt = document.getElementById().value;
-    let newReimbType = document.getElementById("reimbursementType").value;
-    let newUser = {
-        userId: '1',
-        username : 'mjordan',
-        password : 'Password',
-        firstName : 'Matt',
-        lastName : 'Jordan',
-        email : 'mjorda@mjordan',
-        userRoleId : 'ADMIN'
-    }
+    let typeChoice = document.getElementById("reimbursementType").value;
+        switch( typeChoice.toUpperCase()) {
+            case 'LODGING':
+                newReimbType = reimbTypeLodging;
+                break;
+            case 'FOOD':
+                newReimbType = reimbTypeFood;
+                break;
+            case 'TRAVEL':
+                newReimbType = reimbTypeTravel;
+                break;
+            case 'OTHER':
+            newReimbType = reimbTypeOther;
+                break;
+        }
+        console.log(newAuthor);
+
+
+
     let reimb = {
 
         reimbAmount: newReimbAmount,
-        reimbsubmitted: newReimbSubmitted,
-        // reimbDescription: newReimbDescr,
-        // reimbAuthor : JSON.stringify(newUser.userId),
-        reimbstatusId : {
-            reimbstatid: '1',
-            reimbstatus: 'APPROVED'
-        },
-        reimbstatusType : newReimbType
+        reimbAuthor: newAuthor,
+        reimbSubmitted: newReimbSubmitted,
         
- 
+        // reimbDescription: newReimbDescr,
+        reimbAuthor : newAuthor,
+        reimbStatusId : reimbStatusPending,
+        reimbTypeId : newReimbType
+        
+    }
         // reimbDescr: newReimbDescr,
 
         // reimbType: newReimbType
-    }
     return reimb;
 
-}
+
+};
 
 async function addReimb() {
     let reimb = getNewReimb();
@@ -182,3 +239,27 @@ function getNewUser() {
 
     return home;
 }
+function getErsUsername() {
+    let ersUser = document.getElementById("ersUsername").value;
+    return ersUser;
+}
+
+async function getUsername() {
+    let ersUsername = getErsUsername();
+    console.log(ersUsername);
+    let response = await fetch(URL + `ersUsers/${ersUsername}`, { credentials: "include" });
+    if (response.status === 200) {
+        let data = await response.json();
+        console.log(data);
+        sessionStorage.setItem('user', JSON.stringify(data));
+        return data;
+        
+    } else {
+        console.log("Users not available.");
+    }
+}
+
+
+
+
+

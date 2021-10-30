@@ -31,7 +31,7 @@ public class ErsUsersService {
 			if(user != null) {
 				return user;
 			} else {
-				return new ErsUsers();
+				return null;
 			}
 		}
 		
@@ -45,5 +45,14 @@ public class ErsUsersService {
 		
 		public boolean login(UserDTO userDto) {
 			return true;
+		}
+		
+		public ErsUsers getUserByUsername(String ersUsername){
+			ErsUsers user = usersDao.getUsername(ersUsername);
+			if(user != null) {
+				return user;
+			} else {
+				return null;
+			}
 		}
 }

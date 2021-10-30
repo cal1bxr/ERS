@@ -2,7 +2,7 @@ package com.revature.repositories;
 
 import java.util.List;
 
-import javax.persistence.Query;
+import org.hibernate.Query;
 
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
@@ -23,7 +23,7 @@ public class ErsReimbursementDaoImpl implements ErsReimbursementDAO {
 	}
 
 	@Override
-	public List<ErsReimbursement> viewPastTickets(int ersUserId) {
+	public ErsReimbursement viewPastTickets(int ersUserId) {
 		Session session = HibernateUtil.getSession();
 		Query q = session.createQuery("FROM ErsReimbursement WHERE ReimbAuthor = :id" );
 		q.setParameter("id", ersUserId);
