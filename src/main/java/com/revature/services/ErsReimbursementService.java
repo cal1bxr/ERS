@@ -17,7 +17,7 @@ public class ErsReimbursementService {
 		return reimbDao.viewAllTickets();
 	}
 	
-	public List<ErsReimbursement> filterErsReimbursement(ErsReimbursement status) {
+	public List<ErsReimbursement> filterErsReimbursement(ReimbStatus status) {
 		List<ErsReimbursement> reimb = reimbDao.getReimbByStatus(status);
 		if (reimb != null) {
 			return reimb;
