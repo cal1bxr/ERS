@@ -17,6 +17,35 @@ getUserButton.onclick = getUsername;
 reimbButton.innerText = "See All Reimbursements";
 userButton.innerText = "See All Users";
 
+const REIMBSTATUSPENDING ={
+    'reimbStatus': 'PENDING',
+    'reimbStatusId' : '1'
+};
+const REIMBSTATUSAPPROVED ={
+    'reimbStatus': 'APPROVED',
+    'reimbStatusId' : '2'
+}; 
+const REIMBSTATUSDENIED ={
+    'reimbStatus': 'DENIED',
+    'reimbStatusId' : '3'
+};
+const REIMBTYPELODGING = {
+    'reimbTypeId': '1',
+    'reimbType': 'LODGING'
+};
+const REIMBTYPEFOOD = {
+    'reimbTypeId': '2',
+    'reimbType': 'FOOD'
+};
+const REIMBTYPETRAVEL = {
+    'reimbTypeId': '3',
+    'reimbType': 'TRAVEL'
+};
+const REIMBTYPEOTHER = {
+    'reimbTypeId': '4',
+    'reimbType': 'OTHER'
+};
+
 async function loginToApp() {
     let user = {
         username: document.getElementById("username").value,
@@ -80,35 +109,7 @@ function populateReimbsTable(data) {
 function getNewReimb() {
     let newAuthor = JSON.parse(sessionStorage.user);
     console.log(newAuthor);
-    let reimbStatusPending ={
-        'reimbStatus': 'PENDING',
-        'reimbStatusId' : '1'
-    };
-    let reimbStatusApproved ={
-        'reimbStatus': 'APPROVED',
-        'reimbStatusId' : '2'
-    };
-    let reimbStatusDenied ={
-        'reimbStatus': 'DENIED',
-        'reimbStatusId' : '3'
-    };
-    let reimbTypeLodging = {
-        'reimbTypeId': '1',
-        'reimbType': 'LODGING'
-    };
-    let reimbTypeFood = {
-        'reimbTypeId': '2',
-        'reimbType': 'FOOD'
-    };
-    let reimbTypeTravel = {
-        'reimbTypeId': '3',
-        'reimbType': 'TRAVEL'
-    };
-    let reimbTypeOther = {
-        'reimbTypeId': '4',
-        'reimbType': 'OTHER'
-    };
-    
+  
    
     // let newAuthor = {
     //     "ersUsersId" : "5",
@@ -132,16 +133,16 @@ function getNewReimb() {
     let typeChoice = document.getElementById("reimbursementType").value;
         switch( typeChoice.toUpperCase()) {
             case 'LODGING':
-                newReimbType = reimbTypeLodging;
+                newReimbType = REIMBTYPELODGING;
                 break;
             case 'FOOD':
-                newReimbType = reimbTypeFood;
+                newReimbType = REIMBTYPEFOOD;
                 break;
             case 'TRAVEL':
-                newReimbType = reimbTypeTravel;
+                newReimbType = REIMBTYPETRAVEL;
                 break;
             case 'OTHER':
-            newReimbType = reimbTypeOther;
+            newReimbType = REIMBTYPEOTHER;
                 break;
         }
         console.log(newAuthor);
@@ -156,7 +157,7 @@ function getNewReimb() {
         
         // reimbDescription: newReimbDescr,
         reimbAuthor : newAuthor,
-        reimbStatusId : reimbStatusPending,
+        reimbStatusId : REIMBSTATUSPENDING,
         reimbTypeId : newReimbType
         
     }
