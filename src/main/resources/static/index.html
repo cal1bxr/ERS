@@ -57,41 +57,18 @@
         <tbody id="reimbursementBody">
         </tbody>
     </table>
-    <!-- <form class="form-control">
-        <label for="userId">ERS User ID</label>
-            <input type="text" id="userId" name="userId">
-
-        <label for="username">Username</label>
-        <input type="text" id="username" name="username">
-
-        <label for="firstName">First Name</label>
-        <input type="text" id="firstName" name="firstName">
-
-        <label for="lastName">Last Name</label>
-        <input type="text" id="lastName" name="lastName">
-
-        <label for="email">Email</label>
-        <input type="text" id="email" name="email">
-
-        <label for="roleId"> ERS Role Id</label>
-        <input type="text" id="roleId" name="roleId">
-
-    </form>
-    <button class="btn btn-primary" id="addHomeButton">Add Your User</button>
-    </table> -->
-
+    
     <br>
     <br>
 
-    <form class="form-control">
+    <form class="form-control" id="reimbursement">
         <label for="reimbursementAmount">Reimbursement Amount</label>
         <input type="text" id="reimbursementAmount" name="reimbursementAmount">
         <!-- <label for="reimbursementDescription">reimbursementAuthor</label>
         <input type="text" id="reimbursementDescription" name="reimbursementDescription"> -->
         <label for="reimbursementType">Reimbursement Type</label>
         <input type="text" id="reimbursementType" name="reimbursementType">
-        <input type="checkbox" id="approved" name="approved" value="Approved" onchange="updateReimb()">
-        <label for="approved">Approved</label>
+
 
     </form>
     <button class="btn btn-primary" id="addReimbButton">Add Reimbursement</button>
@@ -101,14 +78,211 @@
         <input type="text" id="reimbursementNumber" name="reimbursementNumber">
     </form>
     <button class="btn btn-primary" id="getReimbursementNumber">Get Reimbursement</button>
-    <form class="form-control">
+    <!-- <form class="form-control">
         <label for="reimbursementApproved">Enter Approved for Appproved and Denied for Denied</label>
         <input type="text" id="reimbursementApproved" name="reimbursementApproved">
     </form>
-    <button class="btn btn-primary" id="submitReimb">Submit</button>
+    <button class="btn btn-primary" id="submitReimb">Submit</button> -->
+
+    <button class="btn btn-primary" id="logout">Logout</button>
 
     <script src="./ers.js"></script>
 
   
 
 </html>
+
+<!--
+<div id="login"><section class="h-100 gradient-form" style="background-color: #eee;">
+    <div class="container py-5 h-100">
+      <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col-xl-10">
+          <div class="card rounded-3 text-black">
+            <div class="row g-0">
+              <div class="col-lg-6">
+                <div class="card-body p-md-5 mx-md-4">
+  
+                  <div class="text-center">
+                      <h1>Find Image</h1>
+                    <img src="" style="width: 185px;" alt="logo">
+                    <h4 class="mt-1 mb-5 pb-1">We are ERS Team</h4>
+                  </div>
+  
+                  <form>
+                    <p>Please login to your account</p>
+  
+                    <div class="form-outline mb-4">
+                      <input type="email" id="form2Example11" class="form-control" placeholder="Phone number or email address"/>
+                      <label class="form-label" for="form2Example11">Username</label>
+                    </div>
+  
+                    <div class="form-outline mb-4">
+                      <input type="password" id="form2Example22" class="form-control" />
+                      <label class="form-label" for="form2Example22">Password</label>
+                      <div>
+                      <button type="button" id="reimbAddButton" class="btn btn-primary px-2"><a routerLink='/employee'>Login</a> </button>
+                      
+                    </div>
+                    </div>  
+                  </form>
+  
+                </div>
+              </div>
+              <div class="col-lg-6 d-flex align-items-center gradient-custom-2">
+                <div class="text-white px-3 py-4 p-md-5 mx-md-4">
+                  <h4 class="mb-4">We are more than just a company</h4>
+                  <p class="small mb-0">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<div id="reimb-form">
+    <div class="col d-flex justify-content-center">
+<div class="card" style="width: 18rem;">
+    <div class="card-body">
+        <div class="row g-3">
+            <form action="">
+                <div class="col-mid-6">       
+                    <div class="form-group">
+                        <label for="reimbAmount" class="form-label">Enter Reimbursement Amount</label>
+                        <input type="text" id="reimbAmount" class="form-control">
+                    </div>
+                </div>
+                    <div class="col-mid-6">
+                        <div class="form-group">
+                            <label for="reimbType">Enter Reimbursement Type</label>
+                            <input type="text" id="reimbType" class="form-control">
+                        </div>
+                    </div>    
+            </form>
+        </div>
+    </div>
+</div>
+</div>
+</div>
+
+<div id="managerForm">
+    <div>
+<app-reimb-table></app-reimb-table>
+<div class="mx-auto d-flex justify-content-around">
+    <button type="button" id="reimbAddButton" class="btn btn-primary px-2">View all Reimbursement</button>
+    <button type="button" id="reimbViewButton" class="btn btn-primary px-2">View Pending Reimbursements</button>
+    <button type="button" id="reimbAddButton" class="btn btn-primary px-2">Add a Reimbursement</button>
+</div>
+</div>
+    <hr>
+<br>
+<br>
+<hr>
+
+
+<div>
+<app-reimb-table></app-reimb-table>
+<div class="mx-auto d-flex justify-content-around">
+    <button type="button" id="reimbAddButton" class="btn btn-primary px-2">Approve Reimbrusement</button>
+    <button type="button" id="reimbViewButton" class="btn btn-primary px-2">Deny Reimbursement</button>
+</div>
+</div>
+</div>
+<div id="navBar">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">Navbar</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item active">
+          <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <a routerLink='/empform'>Reimbursements</a>
+        </li>
+        <li class="nav-item">
+          <a routerLink='/user'>Employees</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link disabled" href="#">Disabled</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+</div>
+<div id="admin">
+    <div class="container-fluid">
+<h1>Welcome to the ERS System, Admin</h1>
+
+<h3>What would you like to do today</h3>
+<div><button> <a routerLink=>Add a Reimbursement</a></button></div>
+<div><button><a routerLink=>View Past Reimbursements</a></button></div>
+<div><button><a routerLink=>Approve Reimbursements</a></button></div>
+<div><button><a routerLink=>Deny Reimbursement</a></button></div>
+</div>
+</div>
+
+<div id="rTable">
+    <div id="reimb-table">
+    <div class="card">
+        <div class="card-body">
+            <div class="row g-6">
+                <ul class="list-group list-group-horizontal">
+                    <div class="cells">Reimbursement ID</div>
+                    <div class="cells">Reimbursement Amount</div>
+                    <div class="cells">Date Submitted</div>
+                    <div class="cells">Date Resolved</div>
+                    <div class="cells">Reimbursement Author</div>
+                    <div class="cells">Reimbursement Resolver</div>
+                    <div class="cells">Status</div>
+                    <div class="cells">Type</div>
+                </ul>
+            </div> 
+            <div class="row g-6">
+                    <ul class="list-group list-group-horizontal">
+                        <div class="cells">Placeholder</div>
+                        <div class="cells">Placeholder</div>
+                        <div class="cells">Placeholder</div>
+                        <div class="cells">Placeholder</div>
+                        <div class="cells">Placeholder</div>
+                        <div class="cells">Placeholder</div>
+                        <div class="cells">Placeholder</div>
+                        <div class="cells">Placeholder</div>
+                </ul>    
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+<div id="uTable">
+    <div class="user-table">
+    <div class="card">
+        <div class="card-body">
+            <div class="row g-6">
+                <ul class="list-group list-group-horizontal">
+                    <div class="cells">Username</div>
+                    <div class="cells">First Name</div>
+                    <div class="cells">Last Name</div>
+                    <div class="cells">Email</div>
+                    <div class="cells">User Role</div>
+                </ul>
+            </div> 
+            <div class="row g-6">
+                <ul class="list-group list-group-horizontal">
+                    <div class="cells">Placeholder</div>
+                    <div class="cells">Placeholder</div>
+                    <div class="cells">Placeholder</div>
+                    <div class="cells">Placeholder</div>
+                    <div class="cells">Placeholder</div>
+                </ul>
+            </div>
+        </div>
+    </div>    
+</div>
+</div>
+
+-->

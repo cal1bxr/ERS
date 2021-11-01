@@ -8,13 +8,18 @@ let loginButton = document.getElementById('loginButton');
 let getUserButton = document.getElementById('getUserNameButton')
 let reimbursementButton = document.getElementById('getReimbursementNumber');
 let submitButton = document.getElementById('submitReimb');
+let logoutButton = document.getElementById('logout');
+let pastReimbursementButton = document.getElementById('View Past Reimbursements')
 
 reimbButton.onclick = getAllReimbs;
 userButton.onclick = getAllUsers;
 addReimbButton.onclick = addReimb;
 loginButton.onclick = loginToApp;
 reimbursementButton.onclick = approveDeny;
-submitButton.onclick = submitUpdate;
+// submitButton.onclick = submitUpdate;
+logoutButton.onclick = logout;
+// pastReimbursementButton.onclick = getPastTickets;
+
 
 
 reimbButton.innerText = "See All Reimbursements";
@@ -51,6 +56,10 @@ const REIMBTYPEOTHER = {
     'reimbType': 'OTHER'
 };
 
+function logout(){
+    sessionStorage.clear();
+}
+
 async function loginToApp() {
     let user = {
         username: document.getElementById("username").value,
@@ -67,16 +76,21 @@ async function loginToApp() {
     username = user;
 
     if (response.status === 200) {
-        document.getElementsByClassName("formClass")[0].innerHTML = "";
-        buttonRow.appendChild(reimbButton);
-        buttonRow.appendChild(userButton);
+       
         getUsername();
             // if(ersUsersRole.userRoleId == 1){
             //     buttonRow.appendChild(div);
             // } else{
             //     buttonRow.appendChild(otherDiv);
             // }
-        } else {
+        let userLogin = sessionStorage.getItem('user');
+        userParsed = JSON.parse(userLogin);
+        console.log(userParsed);
+            document.getElementsByClassName("formClass")[0].innerHTML = "";
+            buttonRow.appendChild(reimbButton);
+            buttonRow.appendChild(userButton);
+            buttonRow.appendChild(addReimbButton);
+    } else {
         let para = document.createElement("p");
         para.setAttribute("style", "color:red");
         para.innerText = "LOGIN FAILED";
@@ -95,48 +109,44 @@ async function getAllReimbs() {
     }
 }
 
+function convertTimestamp(timeStamp){
+    var date = new Date(timeStamp);
+
+    return date;
+}
+
 function populateReimbsTable(data) {
     let tbody = document.getElementById("reimbursementBody");
+    console.log(data)
     
 
     tbody.innerHTML = "";
 
     for (let reimb of data) {
         let row = document.createElement("tr");
-        timeStamp = new Date();
-        console.log(timeStamp);
 
         for (let cell in reimb) {
             let td = document.createElement("td");
                 td.innerText = reimb[cell];
-                row.appendChild(td);
+                if((cell=="reimbAuthor" ||cell=="reimbResolver")&&reimb[cell]){
+                    td.innerText = reimb[cell].ersUserName;
+                }else if(cell=="reimbStatusId"&&reimb[cell]){ 
+                    td.innerText = `${reimb[cell].reimbStatus}`
+                }else if(cell=="reimbTypeId"&&reimb[cell]){
+                    td.innerText = `${reimb[cell].reimbType}`
+                }else if((cell=="reimbSubmitted"||cell=="reimbResolved")&&reimb[cell]){
+                    td.innerText = `${convertTimestamp(reimb[cell])}`
+                }else if(reimb[cell]){
+                    td.innerText = `${reimb[cell]}`
+                }
+                  row.appendChild(td);
             }
+            
     
         tbody.appendChild(row);
-
-        /* for(let cell in reimb){             //create each cell
-            let td = document.createElement("td"); 
-            td.innerText = reimb[cell];
-            row.appendChild(td);            //appends datacell to row
-            if((cell=="resolver" ||cell=="author")&&reimb[cell]){
-                td.innerText = reimb[cell].userId;
-            }else if(cell=="status"&&reimb[cell]){//if null: false. else true. 
-                td.innerText = `${reimb[cell].status}  `
-            }else if(cell=="type"&&reimb[cell]){//if null: false. else true. 
-                td.innerText = `${reimb[cell].type}  `
-            }else if((cell=="submitted"||cell=="resolved")&&reimb[cell]){//if null: false. else true. 
-                
-                td.innerText = `${convertTimestamp(reimb[cell])}  `
-            }else if(cell=="receipt"&&reimb[cell]){//if null: false. else true. 
-                td.innerText = `${reimb[cell]}  `
-            }else if(reimb[cell]){
-                td.innerText = `${reimb[cell]}  `
-            }
-        }
-        tbody.appendChild(row);     //appends the row after previous row in table
-    }*/
     }
 }
+
 
 function getNewReimb() {
     let newAuthor = JSON.parse(sessionStorage.user);
@@ -184,7 +194,7 @@ function getNewReimb() {
     let reimb = {
 
         reimbAmount: newReimbAmount,
-        reimbAuthor: newAuthor,
+
         reimbSubmitted: newReimbSubmitted,
         
         // reimbDescription: newReimbDescr,
@@ -198,32 +208,32 @@ function getNewReimb() {
         // reimbType: newReimbType
     return reimb;
 
-
-};
-
-function updatedReimb(){
-    if(document.getElementById("approved")){
-        reimbStatusId = REIMBSTATUSAPPROVED;
-    } else {
-        reimbStatusId = REIMBSTATUSDENIED;
-    }
-
-    console.lot(reimbStatusId);
 }
 
-async function approveDenyReimb(){
-    let reimb = updatedReimb();
-    let response = await fetch(URL + "reimbs", {
-        method: 'PUT',
-        body: JSON.stringify(reimb),
-        credentials: "include"
-    });
 
-    if(response.status === 200){
-        let data = await response.json();
-        console.log(data)
-    }
-}
+// function updatedReimb(){
+//     if(document.getElementById("approved")){
+//         reimbStatusId = REIMBSTATUSAPPROVED;
+//     } else {
+//         reimbStatusId = REIMBSTATUSDENIED;
+//     }
+
+//     console.lot(reimbStatusId);
+// }
+
+// async function approveDenyReimb(){
+//     let reimb = updatedReimb();
+//     let response = await fetch(URL + "reimbs", {
+//         method: 'PUT',
+//         body: JSON.stringify(reimb),
+//         credentials: "include"
+//     });
+
+//     if(response.status === 200){
+//         let data = await response.json();
+//         console.log(data)
+//     }
+// }
 
 async function addReimb() {
     let reimb = getNewReimb();
@@ -241,9 +251,9 @@ async function addReimb() {
         console.log("Something went wrong creating your user.")
     }
 
+    
+
 }
-
-
 
 async function getAllUsers() {
     let response = await fetch(URL + "ersUsers", { credentials: "include" });
@@ -265,7 +275,7 @@ function populateUsersTable(data) {
         let row = document.createElement("tr");
         for (let cell in user) {
             let td = document.createElement("td");
-            if (cell != "ersUserRole") {
+            if (cell != "reimbAuthor") {
                 td.innerText = user[cell];
                 // td.innerText = `${user.ersUsersId}: ${user.ersUsername}, ${user.ersFirstName}, ${user.ersLastName}, ${user.ersEmail}`;
             } else if (user[cell]) {
@@ -275,28 +285,6 @@ function populateUsersTable(data) {
         }
         tbody.appendChild(row);
     }
-}
-
-function getNewUser() {
-    let newName = document.getElementById("homeName").value;
-    let newStreetNum = document.getElementById("homeStreetNum").value;
-    let newStreetName = document.getElementById("homeStreetName").value;
-    let newCity = document.getElementById("homeCity").value;
-    let newRegion = document.getElementById("homeRegion").value;
-    let newZip = document.getElementById("homeZip").value;
-    let newCounty = document.getElementById("homeCountry").value;
-
-    let home = {
-        name: newName,
-        streetNumber: newStreetNum,
-        streetName: newStreetName,
-        city: newCity,
-        region: newRegion,
-        zip: newZip,
-        country: newCounty
-    }
-
-    return home;
 }
 
 async function getUsername() {
@@ -348,6 +336,7 @@ async function approveDeny(){
     }
 
     sessionStorage.setItem("status", "data.reimbStatusId");
+
 }
 
 async function submitUpdate(){
@@ -362,9 +351,4 @@ async function submitUpdate(){
         console.log("update failed");
     }
 }
-
-
-
-
-
 
