@@ -90,18 +90,25 @@
         <input type="text" id="reimbursementDescription" name="reimbursementDescription"> -->
         <label for="reimbursementType">Reimbursement Type</label>
         <input type="text" id="reimbursementType" name="reimbursementType">
+        <input type="checkbox" id="approved" name="approved" value="Approved" onchange="updateReimb()">
+        <label for="approved">Approved</label>
+
     </form>
     <button class="btn btn-primary" id="addReimbButton">Add Reimbursement</button>
     
     <form class="form-control">
-        <label for="ersUsername">Enter Username</label>
-        <input type="text" id="ersUsername" name="ersUsername">
-        <!-- <label for="reimbursementDescription">reimbursementAuthor</label>
-        <input type="text" id="reimbursementDescription" name="reimbursementDescription"> -->
+        <label for="reimbursementNumber">Enter Reimbursement Number</label>
+        <input type="text" id="reimbursementNumber" name="reimbursementNumber">
     </form>
-    <button class="btn btn-primary" id="getUserNameButton">FindUser</button>
+    <button class="btn btn-primary" id="getReimbursementNumber">Get Reimbursement</button>
+    <form class="form-control">
+        <label for="reimbursementApproved">Enter Approved for Appproved and Denied for Denied</label>
+        <input type="text" id="reimbursementApproved" name="reimbursementApproved">
+    </form>
+    <button class="btn btn-primary" id="submitReimb">Submit</button>
 
     <script src="./ers.js"></script>
-</body>
+
+  
 
 </html>
