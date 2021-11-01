@@ -53,29 +53,30 @@ public class App {
 //		
 //		ErsUserRoles ersUserRole1 = new ErsUserRoles(1, "ADMIN");
 //		ErsUserRoles ersUserRole2 = new ErsUserRoles(2, "EMPLOYEE");
-//////
+//
 //		ErsUsers ersUser1 = new ErsUsers("mjordan","Password".hashCode(),"Matt","Jordan","mjordan@mjordan", ersUserRole1);
 //		ErsUsers ersUser2 = new ErsUsers("mjo","password".hashCode(),"M","Jo","new@new", ersUserRole2);
 //		ErsUsers ersUser3 = new ErsUsers("test","test".hashCode(),"test","test","something@mjordan", ersUserRole2);
 //		ErsUsers ersUser4 = new ErsUsers("test2","whatever".hashCode(),"test2","test2","matt@mjordan", ersUserRole2);
-//////		
+//		
 //		ErsReimbursement ersReimb1 = new ErsReimbursement(100.00, ts, null, null, ersUser1, null, ersReimbursementStatus1, ersReimbursementType1);
 //		ErsReimbursement ersReimb2 = new ErsReimbursement(2100.00, ts, null, null, ersUser2, null, ersReimbursementStatus2, ersReimbursementType2);
 //		ErsReimbursement ersReimb3 = new ErsReimbursement(399.99, ts, ts, null, ersUser3, ersUser1, ersReimbursementStatus1, ersReimbursementType3);
 //		ErsReimbursement ersReimb4 = new ErsReimbursement(52.35, ts, null, null, ersUser4, null, ersReimbursementStatus3, ersReimbursementType4);
-////
-//////
-////		
+//
+//		
 //		userDao.addUser(ersUser1);
 //		userDao.addUser(ersUser2);
 //		userDao.addUser(ersUser3);
 //		userDao.addUser(ersUser4);
-////		
+//
+//
+//		
 //		reimbDao.addReimbursement(ersReimb1);
 //		reimbDao.addReimbursement(ersReimb2);
 //		reimbDao.addReimbursement(ersReimb3);
 //		reimbDao.addReimbursement(ersReimb4);
-		
+//		
    
 		
 		

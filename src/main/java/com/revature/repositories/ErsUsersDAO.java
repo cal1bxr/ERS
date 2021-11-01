@@ -4,7 +4,6 @@ import java.util.List;
 
 import com.revature.models.ErsUsers;
 
-import CurrentlyUnused.ErsUser;
 
 public interface ErsUsersDAO {
 

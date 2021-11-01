@@ -11,8 +11,6 @@ import org.hibernate.Transaction;
 import com.revature.models.ErsReimbursement;
 import com.revature.utils.HibernateUtil;
 
-import CurrentlyUnused.ErsReimb;
-import CurrentlyUnused.ErsReimb.ReimbStatus;
 
 public class ErsReimbursementDaoImpl implements ErsReimbursementDAO {
 
@@ -52,7 +50,7 @@ public class ErsReimbursementDaoImpl implements ErsReimbursementDAO {
 		try {
 			Session session = HibernateUtil.getSession();
 			Transaction tx = session.beginTransaction();
-			session.save(reimb);
+			session.saveOrUpdate(reimb);
 			tx.commit();
 			HibernateUtil.closeSession();
 			return true;

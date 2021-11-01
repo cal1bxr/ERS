@@ -5,7 +5,6 @@ import java.util.List;
 import com.revature.models.ErsUsers;
 import com.revature.services.ErsUsersService;
 
-import CurrentlyUnused.ErsUser;
 import io.javalin.Javalin;
 import io.javalin.http.Handler;
 

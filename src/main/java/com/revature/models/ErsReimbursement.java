@@ -35,11 +35,11 @@ public class ErsReimbursement {
     private byte[] reimbReceipt;
     
     @ManyToOne(fetch=FetchType.EAGER)
-    @JoinColumn(name="ersUsersId")
+//    @JoinColumn(name="reimbAuthor")
     private ErsUsers reimbAuthor;
     
     @ManyToOne(fetch=FetchType.EAGER)
-    @JoinColumn(name="ersUsersId", insertable=false, updatable=false)
+//    @JoinColumn(name="reimbResolver")
     private ErsUsers reimbResolver;
     
     @ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)

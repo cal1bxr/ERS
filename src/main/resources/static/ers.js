@@ -15,7 +15,7 @@ reimbButton.onclick = getAllReimbs;
 userButton.onclick = getAllUsers;
 addReimbButton.onclick = addReimb;
 loginButton.onclick = loginToApp;
-reimbursementButton.onclick = approveDeny;
+// reimbursementButton.onclick = approveDeny;
 // submitButton.onclick = submitUpdate;
 logoutButton.onclick = logout;
 // pastReimbursementButton.onclick = getPastTickets;
@@ -29,11 +29,11 @@ var username;
 
 const REIMBSTATUSPENDING ={
     'reimbStatus': 'PENDING',
-    'reimbStatusId' : '1'
+    'reimbStatusId' : '2'
 };
 const REIMBSTATUSAPPROVED ={
     'reimbStatus': 'APPROVED',
-    'reimbStatusId' : '2'
+    'reimbStatusId' : '1'
 }; 
 const REIMBSTATUSDENIED ={
     'reimbStatus': 'DENIED',
@@ -78,24 +78,29 @@ async function loginToApp() {
     if (response.status === 200) {
        
         getUsername();
-            // if(ersUsersRole.userRoleId == 1){
-            //     buttonRow.appendChild(div);
-            // } else{
-            //     buttonRow.appendChild(otherDiv);
-            // }
-        let userLogin = sessionStorage.getItem('user');
-        userParsed = JSON.parse(userLogin);
-        console.log(userParsed);
-            document.getElementsByClassName("formClass")[0].innerHTML = "";
-            buttonRow.appendChild(reimbButton);
-            buttonRow.appendChild(userButton);
-            buttonRow.appendChild(addReimbButton);
+        setEnvironment();
     } else {
         let para = document.createElement("p");
         para.setAttribute("style", "color:red");
         para.innerText = "LOGIN FAILED";
         document.getElementsByClassName("formClass")[0].appendChild(para);
     }
+}
+
+async function setEnvironment(){
+    let userParsed = JSON.parse(sessionStorage.getItem('user'));
+    console.log(typeof (userParsed.ersUserRole.userRoleId));
+    let userLogin = userParsed.ersUserRole.userRoleId;
+        if(userLogin === 1){
+            document.getElementsByClassName("formClass")[0].innerHTML = "";
+            buttonRow.appendChild(reimbButton);
+            buttonRow.appendChild(userButton);
+            buttonRow.appendChild(addReimbButton);
+        } else {
+            buttonRow.appendChild(reimbButton);
+            buttonRow.appendChild(addReimbButton);
+        }
+        
 }
 async function getAllReimbs() {
     let response = await fetch(URL + "reimbs", { credentials: "include" });
@@ -117,27 +122,34 @@ function convertTimestamp(timeStamp){
 
 function populateReimbsTable(data) {
     let tbody = document.getElementById("reimbursementBody");
-    console.log(data)
     
 
     tbody.innerHTML = "";
 
-    for (let reimb of data) {
+    for (let reimbs of data) {
         let row = document.createElement("tr");
 
-        for (let cell in reimb) {
+        for (let cell in reimbs) {
             let td = document.createElement("td");
-                td.innerText = reimb[cell];
-                if((cell=="reimbAuthor" ||cell=="reimbResolver")&&reimb[cell]){
-                    td.innerText = reimb[cell].ersUserName;
-                }else if(cell=="reimbStatusId"&&reimb[cell]){ 
-                    td.innerText = `${reimb[cell].reimbStatus}`
-                }else if(cell=="reimbTypeId"&&reimb[cell]){
-                    td.innerText = `${reimb[cell].reimbType}`
-                }else if((cell=="reimbSubmitted"||cell=="reimbResolved")&&reimb[cell]){
-                    td.innerText = `${convertTimestamp(reimb[cell])}`
-                }else if(reimb[cell]){
-                    td.innerText = `${reimb[cell]}`
+                td.innerText = reimbs[cell];
+                console.log(reimbs[cell]);
+                if((cell=="reimbAuthor") && reimbs[cell]){
+                    console.log(reimbs.reimbAuthor.ersUsername);
+                    td.innerText = `${reimbs.reimbAuthor.ersUsername}`;   
+                } else if(cell=="reimbResolver" && reimbs[cell]){
+                    if(cell=="reimbResolver" && reimbs[cell]){
+                    td.innerText = `${reimbs.reimbResolver.ersUsername}`;
+                    } else {
+                        td.innerText = 'null';
+                    }
+                } else if(cell=="reimbStatusId" && reimbs[cell]){ 
+                    td.innerText = `${reimbs[cell].reimbStatus}`;
+                }else if(cell=="reimbTypeId" && reimbs[cell]){
+                    td.innerText = `${reimbs[cell].reimbType}`;
+                }else if((cell=="reimbSubmitted"||cell=="reimbResolved") && reimbs[cell]){
+                    td.innerText = `${convertTimestamp(reimbs[cell])}`;
+                }else if(reimbs[cell]){
+                    td.innerText = `${reimbs[cell]}`;
                 }
                   row.appendChild(td);
             }
@@ -149,29 +161,10 @@ function populateReimbsTable(data) {
 
 
 function getNewReimb() {
-    let newAuthor = JSON.parse(sessionStorage.user);
-    console.log(newAuthor);
-  
-   
-    // let newAuthor = {
-    //     "ersUsersId" : "5",
-    //     "ersUsername": "mjon",
-    //     "ersPassword": "password",
-    //     "ersFirstName": "Matt",
-    //     "ersLastName": "Jordan",
-    //     "ersEmail": "m@mjordan",
-    //     "ersUserRole": {
-    //         "userRoleId": 1,
-    //         "userRole": "ADMIN"
-    //     }
-    // };
-
+    let newAuthor = JSON.parse(sessionStorage.user);  
+    
     let newReimbAmount = document.getElementById("reimbursementAmount").value;
     let newReimbSubmitted = new Date();
-    // let newReimbAuthor = newAuthor;
-    // let newReimbDescr = document.getElementById("reimbursementDescription");
-    // let newReimbAuthor = document.getElementById("reimbursementAuthor").value;
-    // let newReimbReceipt = document.getElementById().value;
     let typeChoice = document.getElementById("reimbursementType").value;
         switch( typeChoice.toUpperCase()) {
             case 'LODGING':
@@ -187,9 +180,6 @@ function getNewReimb() {
             newReimbType = REIMBTYPEOTHER;
                 break;
         }
-        console.log(newAuthor);
-
-
 
     let reimb = {
 
@@ -203,13 +193,9 @@ function getNewReimb() {
         reimbTypeId : newReimbType
         
     }
-        // reimbDescr: newReimbDescr,
-
-        // reimbType: newReimbType
     return reimb;
 
 }
-
 
 // function updatedReimb(){
 //     if(document.getElementById("approved")){
@@ -250,9 +236,6 @@ async function addReimb() {
     } else {
         console.log("Something went wrong creating your user.")
     }
-
-    
-
 }
 
 async function getAllUsers() {
@@ -277,7 +260,6 @@ function populateUsersTable(data) {
             let td = document.createElement("td");
             if (cell != "reimbAuthor") {
                 td.innerText = user[cell];
-                // td.innerText = `${user.ersUsersId}: ${user.ersUsername}, ${user.ersFirstName}, ${user.ersLastName}, ${user.ersEmail}`;
             } else if (user[cell]) {
                 td.innerText = `${user[cell].userRole}`;
             }
@@ -288,15 +270,12 @@ function populateUsersTable(data) {
 }
 
 async function getUsername() {
-    console.log(username.username);
-    let response = await fetch(URL + `ersUsers/${username.username}`, { credentials: "include" }); //   /ersuser/mjordan
+    let response = await fetch(URL + `ersUsers/${username.username}`, { credentials: "include" }); 
     if (response.status === 200) {
         let data = await response.json();
         console.log(data);
         sessionStorage.setItem('user', JSON.stringify(data));
-
         return data;
-        
     } else {
         console.log("Users not available.");
     }
@@ -312,43 +291,41 @@ async function getPastTickets(){
     if (response.status === 200){
         let data = await response.json();
         console.log(data);
-        
         return data;
-
     } else {
         console.log("No reimbursment exists");
     }
 }
 
-async function approveDeny(){
-    ticket = document.getElementById("reimbursementNumber").value;
-    let response = await fetch(URL + `reimb/${ticket}`, {credenetials: "include"});
-    if(response.status === 200){
-        let data = await response.json();
-        console.log(data.reimbStatusId);
-            if(document.getElementById("reimbursementApproved") === "Approved"){
-                data.reimbStatusId = REIMBSTATUSAPPROVED;
-            } else if (document.getElementById("reimbursementApproved") === "Denied"){
-                data.reimbStatusId = REIMBSTATUSDENIED;
-            }
-    } else {
-        console.log("No reimb found");
-    }
+// async function approveDeny(){
+//     ticket = document.getElementById("reimbursementNumber").value;
+//     let response = await fetch(URL + `reimb/${ticket}`, {credenetials: "include"});
+//     if(response.status === 200){
+//         let data = await response.json();
+//         console.log(data.reimbStatusId);
+//             if(document.getElementById("reimbursementApproved") === "Approved"){
+//                 data.reimbStatusId = REIMBSTATUSAPPROVED;
+//             } else if (document.getElementById("reimbursementApproved") === "Denied"){
+//                 data.reimbStatusId = REIMBSTATUSDENIED;
+//             }
+//     } else {
+//         console.log("No reimb found");
+//     }
 
-    sessionStorage.setItem("status", "data.reimbStatusId");
+//     sessionStorage.setItem("status", "data.reimbStatusId");
 
-}
+// }
 
-async function submitUpdate(){
-    let response = await fetch(URL + '/reimbs', {
-        method: 'POST',
-        body: JSON.stringify(data.reimbStatusId),
-        credentials: "include"
-    });
-    if(response.status === 200){
-        console.log("Reimb updated");
-    } else {
-        console.log("update failed");
-    }
-}
+// async function submitUpdate(){
+//     let response = await fetch(URL + '/reimbs', {
+//         method: 'POST',
+//         body: JSON.stringify(data.reimbStatusId),
+//         credentials: "include"
+//     });
+//     if(response.status === 200){
+//         console.log("Reimb updated");
+//     } else {
+//         console.log("update failed");
+//     }
+// }
 

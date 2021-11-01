@@ -7,7 +7,6 @@ import com.revature.models.UserDTO;
 import com.revature.repositories.ErsUsersDAO;
 import com.revature.repositories.ErsUsersDaoImpl;
 
-import CurrentlyUnused.ErsUser;
 
 public class ErsUsersService {
 
