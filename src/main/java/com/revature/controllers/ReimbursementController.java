@@ -27,7 +27,7 @@ public class ReimbursementController implements Controller{
 		
 	public Handler getReimbTickets = (ctx) -> {
 		try {
-			String reimbursement = ctx.pathParam("ErsReimbursement");
+			String reimbursement = ctx.pathParam("ticket");
 			int id = Integer.parseInt(reimbursement);
 			ErsReimbursement reimb = reimbService.getReimbursement(id);
 			ctx.json(reimb);
@@ -41,9 +41,9 @@ public class ReimbursementController implements Controller{
 	public Handler getPastTickets = (ctx) -> {
 //		if (ctx.req.getSession(false) != null) {
 			try {
-				String reimbursement = ctx.pathParam("ErsReimbursement");
+				String reimbursement = ctx.pathParam("tickets");
 				int id = Integer.parseInt(reimbursement);
-				ErsReimbursement reimb = reimbService.getPastTickets(id);
+				List<ErsReimbursement> reimb = reimbService.getPastTickets(id);
 				ctx.json(reimb);
 				ctx.status(200);
 			} catch (NumberFormatException e) {
@@ -63,7 +63,7 @@ public class ReimbursementController implements Controller{
 			} else {
 				ctx.status(400);
 			}
-		} ;
+		};
 //	else {
 //			ctx.status(401);
 //		}	
@@ -88,15 +88,13 @@ public class ReimbursementController implements Controller{
 		app.get("reimbs", this.getAllReimbs);
 		app.get("/reimbs/:tickets", this.getPastTickets);
 		app.post("/reimbs", this.addReimb);
-		app.put("/reimbs", this.updateReimb);		
+		app.put("/reimbs", this.updateReimb);
+		app.get("/reimb/:ticket", this.getReimbTickets);
 	}
 }
 
-/* "FROM User Hwere usermane '" + username + '").list
- * 
- * 
- * 
- */
+
+
 	
 	
 

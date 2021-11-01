@@ -10,9 +10,9 @@ import java.util.List;
 
 public interface ErsReimbursementDAO {
 	List<ErsReimbursement> viewAllTickets();
-	ErsReimbursement viewPastTickets(int ersUserId);
+	List<ErsReimbursement> viewPastTickets(int ersUserId);
 	List<ErsReimbursement> getReimbByStatus(int status);
-	ErsReimbursement viewPastReimbursement(int ersUsersId);
+	List<ErsReimbursement> viewPastReimbursement(int ersUsersId);
 	ErsReimbursement findById(int reimbId);
     boolean addReimbursement(ErsReimbursement reimb);
     boolean updateReimbursement(ErsReimbursement reimb);

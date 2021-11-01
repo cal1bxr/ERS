@@ -61,7 +61,7 @@ public class ErsUsersDaoImpl implements ErsUsersDAO {
 	@Override
 	public ErsUsers getUserRole(int ersUsersId) {
 		Session session = HibernateUtil.getSession();
-		List<ErsUsers> list = session.createQuery("FROM ErsUsers WHERE ErsUsers.erUserId = " + ersUsersId).list();
+		List<ErsUsers> list = session.createQuery("FROM ErsUsers WHERE ErsUsers.ersUserId = " + ersUsersId).list();
 	    ErsUsers user = list.get(0);
         return user;
 	}

@@ -36,7 +36,7 @@ public class UsersController implements Controller{
 	
 	public Handler getUserByUsername = (ctx) -> {
 		if(ctx.req.getSession(false) != null) {
-			String idString = ctx.pathParam("ersUsername");
+			String idString = ctx.pathParam("ersUsername"); // mjordan
 			ErsUsers ersUser = userService.getUserByUsername(idString);
 			ctx.json(ersUser);
 			ctx.status(200);
@@ -76,16 +76,23 @@ public class UsersController implements Controller{
 			ctx.status(400);
 		}
 	};
-
 	
-	public Handler login = (ctx) -> {
-		
+	public Handler getRoleById = (ctx) -> {
+		if(ctx.req.getSession(false) != null) {
+			String idString = ctx.pathParam("ersRoleId"); // mjordan
+			ErsUsers ersUser = userService.getUserRole(Integer.parseInt(ctx.pathParam("ersUsersId")));
+			ctx.json(ersUser);
+			ctx.status(200);
+		} else {
+			ctx.status(401);
+		}
 	};
 
 	@Override
 	public void addRoutes(Javalin app) {
 		app.get("/ersUsers", this.getAllUsers);
 		app.get("/ersUsers/:ersUsername", this.getUserByUsername);
+		app.get("/ersUsers/:ersRoleId", this.getUserByUsername);
 	
 	}
 		

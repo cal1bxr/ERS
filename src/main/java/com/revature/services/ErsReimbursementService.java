@@ -26,12 +26,12 @@ public class ErsReimbursementService {
 		}
 	}
 	
-	public ErsReimbursement getPastTickets(int ersUsersId) {
-		ErsReimbursement reimb = reimbDao.viewPastReimbursement(ersUsersId);
+	public List<ErsReimbursement> getPastTickets(int ersUsersId) {
+		List<ErsReimbursement> reimb = reimbDao.viewPastTickets(ersUsersId);
 		if (reimb != null) {
 			return reimb;
 		} else {
-			return new ErsReimbursement();
+			return null;
 		}
 	}
 	

@@ -55,4 +55,8 @@ public class ErsUsersService {
 				return null;
 			}
 		}
+		
+		public ErsUsers getUserRole(int ersUsersId) {
+			return usersDao.getUserRole(ersUsersId);
+		}
 }
