@@ -69,16 +69,20 @@ public class ReimbursementController implements Controller{
 //	};
 //	
 	public Handler updateReimb = (ctx) -> {
-		if(ctx.req.getSession(false) != null) {
-			ErsReimbursement reimb = ctx.bodyAsClass(ErsReimbursement.class);
-			if (reimbService.updateErsReimbursement(reimb)) {
+//		if(ctx.req.getSession(false) != null) {
+			try {
+				String reimbursement = ctx.pathParam("reimb");
+				int id = Integer.parseInt(reimbursement);
+				List<ErsReimbursement> reimb = reimbService.getPastTickets(id);
 				ctx.status(200);
-			} else {
-				ctx.status(400);
+			} catch (NumberFormatException e) {
+				e.printStackTrace();
+				ctx.status(406);
 			}
-		} else {
-			ctx.status(401);
-		}
+//		}
+//		else {
+//			ctx.status(401);
+//		}
 	};
 
 	@Override
@@ -87,7 +91,7 @@ public class ReimbursementController implements Controller{
 		app.get("reimbs", this.getAllReimbs);
 		app.get("/reimbs/:tickets", this.getPastTickets);
 		app.post("/reimbs", this.addReimb);
-		app.put("/reimbs", this.updateReimb);
+		app.post("/reimbs/:reimb", this.updateReimb);
 		app.get("/reimb/:ticket", this.getReimbTickets);
 	}
 }

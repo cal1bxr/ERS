@@ -14,11 +14,10 @@ let getPreviousTickets = document.getElementById('getprevReimbursements');
 
 
 
-let submitButton = document.getElementById('submitReimb');
 let logoutButton = document.getElementById('logout');
 
 
-let submitReimbursementButton = document.getElementById('appDenyReimbursment');
+let submitReimbursementButton = document.getElementById('appDenyReimbursement');
 
 
 let reimbButton = document.createElement("button");
@@ -90,11 +89,11 @@ async function loginToApp() {
     });
 
     username = user;
-    getUsername();
+    
     if (response.status === 200) {
-       
-        
-        setEnvironment();
+      
+       getUsername();
+        // setEnvironment();
     } else {
         let para = document.createElement("p");
         para.setAttribute("style", "color:red");
@@ -225,6 +224,7 @@ async function getOneReimbursement(){
     if(response.status === 200){
         let data = await response.json();
         console.log(data);
+        return data;
     } else {
         console.log("Soemthing went wrong");
     }
@@ -252,13 +252,15 @@ function populateUsersTable(data) {
             let td = document.createElement("td");
             if (cell != "ersUserRole") {
                 td.innerText = user[cell];
+            } else if (cell == "ersPassword"){
+                td.innerText == '';
             } else if (user[cell]) {
                 td.innerText = `${user[cell].userRole}`;
             }
             row.appendChild(td);
         }
         tbody.appendChild(row);
-    }
+}
 }
 
 async function getUsername() {
@@ -267,6 +269,7 @@ async function getUsername() {
         let data = await response.json();
         console.log(data);
         sessionStorage.setItem('user', JSON.stringify(data));
+        setEnvironment();
         return data;
 
     } else {
@@ -296,35 +299,53 @@ async function getPastTickets(){
 
 
 async function approveDenyReimb(){
-    let newreimbId = document.getElementById("approveNumber").value;
-    let newStatusId= document.getElementById("approvedDenyReimbursement").value;
+    let typedReimbId = document.getElementById("approveNumber").value;
     let resolvedBy = JSON.parse(sessionStorage.user);
-    console.log(newStatusId);
+    console.log(resolvedBy);
+    let newReimbResolved = new Date();
+    // let selection = document.getElementById('appDenyReimbursment').onclick = function() {
+    //     var e = document.getElementById("approvedDenyReimbursement");
+    //     var value = e.options[e.selectedIndex].value;
+    //     return value;
+    // }
+    let selection = document.getElementById("approvedDenyReimbursement").value;
 
-    if(newStatusId == "Approved"){
+
+    if(selection.toUpperCase() == "APPROVED"){
         newReimbStatusId = REIMBSTATUSAPPROVED;
-    } else {
+    } else if (selection.toUpperCase() == "DENIED"){
         newReimbStatusId = REIMBSTATUSDENIED;
-    }
+    } else (
+        newReimbStatusId = REIMBSTATUSPENDING
+    )
     
 
     let reimb = {
-        reimbId: newreimbId,
-        resolver: resolvedBy,
+        // reimbId: typedReimbId,
+        reimbResolved: newReimbResolved,
+        reimbResolver: resolvedBy,
         reimbStatusId: newReimbStatusId,
     }
-
-    let response = await fetch(URL + "reimbs", {
-        method: 'PUT',
-        body: JSON.stringify(reimb),
-        credentials: "include"
-    });
-
-    if(response.status === 200){
-        let data = await response.json();
-        console.log(data)
-    }
-
+    console.log(reimb);
+    let response = await fetch(URL + `reimbs/${typedReimbId}`, {credentials: "include"});
+        if(response.status === 200){
+            let data = await response.json();
+            console.log(data);
+                let response2 = await fetch(URL + `reimbs/${typedReimbId}`, {
+                    method: 'POST',
+                    body: JSON.stringify(reimb),
+                    credentials: "include"
+                 });
+    
+                if(response2.status === 200){
+            
+                    console.log("Reimbursment update");
+                } else {
+                    console.log("No connection");
+                }
+        } else {
+         console.log("Soemthing went wrong");
+        } 
 }
 
 /*------------------------------------------------Add Reimbursement Logic------------------------------------------------- */

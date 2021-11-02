@@ -110,13 +110,17 @@
     <form class="form-control">
       <label for="approveNumber">Enter Reimbursement Number</label>
         <input type="text" id="approveNumber" name="approveNumber">
-     <select name="approvedDenyReimbursement" id="approvedDenyReimbursement" size="2">
+        <label for="approvedDenyReimbursement">Enter Status Number</label>
+        <input type="text" id="approvedDenyReimbursement" name="approvedDenyReimbursement">
+     <!-- <select name="approvedDenyReimbursement" id="approvedDenyReimbursement">
+        <option value="pending">Pending</option>  
         <option value="approved">Approved</option>  
         <option value="denied">Deny</option>
-      </select>
-      <button class="btn btn-primary" id="appDenyReimbursment">Submit</button>
+      </select> -->
+     
   </form>
-    <button class="btn btn-primary" id="logout">Logout</button>
+  <button class="btn btn-primary" id="appDenyReimbursement">Submit</button>
+    <button class="btn btn-primary" type="button" id="logout">Logout</button>
 
     <script src="./ers.js"></script>
 

@@ -46,7 +46,7 @@ public class ErsReimbursementService {
 		return reimbDao.addReimbursement(reimb);
 	}
 	
-	public boolean updateErsReimbursement(ErsReimbursement reimb) {
+	public boolean updateErsReimbursement(List<ErsReimbursement> reimb) {
 		return reimbDao.updateReimbursement(reimb);
 	}
 

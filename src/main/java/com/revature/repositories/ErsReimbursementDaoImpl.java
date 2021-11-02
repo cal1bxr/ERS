@@ -2,8 +2,6 @@ package com.revature.repositories;
 
 import java.util.List;
 
-import org.hibernate.Query;
-
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -71,11 +69,11 @@ public class ErsReimbursementDaoImpl implements ErsReimbursementDAO {
 	}
 
 	@Override
-	public boolean updateReimbursement(ErsReimbursement reimb) {
+	public boolean updateReimbursement(List<ErsReimbursement> reimb) {
 		try {
 			Session session = HibernateUtil.getSession();
 			Transaction tx = session.beginTransaction();
-			session.merge(reimb);
+			session.saveOrUpdate(reimb);
 			tx.commit();
 			HibernateUtil.closeSession();
 			return true;
