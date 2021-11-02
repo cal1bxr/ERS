@@ -17,32 +17,42 @@ public class ErsReimbursementDaoImpl implements ErsReimbursementDAO {
 	@Override
 	public List<ErsReimbursement> viewAllTickets() {
 		Session session = HibernateUtil.getSession();
-		return session.createQuery("FROM ErsReimbursement").list();
+		List<ErsReimbursement> list = session.createQuery("FROM ErsReimbursement").list();
+		HibernateUtil.closeSession();
+		return list;
 	}
 
 	@Override
-	public List<ErsReimbursement> viewPastTickets(int ersUserId) {
+	public List<ErsReimbursement> viewPastTickets(int reimbAuthor) {
 		Session session = HibernateUtil.getSession();
-		return session.createQuery("FROM ErsReimbursement WHERE ersUsersId = '" + ersUserId + "'").list();
+		List<ErsReimbursement> list =  session.createQuery("FROM ErsReimbursement WHERE reimbAuthor = '" + reimbAuthor + "'").list();
+		HibernateUtil.closeSession();
+		return list;
 
 	}
 
 	@Override
 	public List<ErsReimbursement> getReimbByStatus(int status) {
 		Session session = HibernateUtil.getSession();
-		return session.createQuery("FROM Ers_Reimbursement WHERE Reimb_StatId = " + status).list();
+		List<ErsReimbursement> list = session.createQuery("FROM ErsReimbursement WHERE reimbStatusId = " + status).list();
+		HibernateUtil.closeSession();
+		return list;
 	}
 
 	@Override
 	public List<ErsReimbursement> viewPastReimbursement(int ersUsersId) {
 		Session session = HibernateUtil.getSession();
-		return (List<ErsReimbursement>) session.get(ErsReimbursement.class, ersUsersId);
+		List<ErsReimbursement> list =  (List<ErsReimbursement>) session.get(ErsReimbursement.class, ersUsersId);
+		HibernateUtil.closeSession();
+		return list;
 	}
 
 	@Override
 	public ErsReimbursement findById(int reimbId) {
 		Session session = HibernateUtil.getSession();
-		return session.get(ErsReimbursement.class, reimbId);
+		ErsReimbursement ersReimb = session.get(ErsReimbursement.class, reimbId);
+		HibernateUtil.closeSession();
+		return ersReimb;
 	}
 
 	@Override
