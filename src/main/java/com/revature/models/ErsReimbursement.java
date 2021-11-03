@@ -1,7 +1,6 @@
 package com.revature.models;
 
 import java.sql.Timestamp;
-import java.time.LocalDateTime;
 import java.util.Arrays;
 
 import javax.persistence.CascadeType;
@@ -14,7 +13,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
-import javax.persistence.Table;
 
 @Entity
 public class ErsReimbursement {
@@ -26,13 +24,15 @@ public class ErsReimbursement {
     @Column(nullable=false)
     private double reimbAmount;
     
-    @Column(nullable=false)
+	@Column(nullable=false)
     private Timestamp reimbSubmitted;
     
     private Timestamp reimbResolved;
     
     @Lob
     private byte[] reimbReceipt;
+
+	private String reimbDescription;
     
     @ManyToOne(fetch=FetchType.EAGER)
 //    @JoinColumn(name="reimbAuthor")
@@ -51,14 +51,15 @@ public class ErsReimbursement {
     private ErsReimbursementType reimbTypeId;
 
 	public ErsReimbursement(int reimbId, double reimbAmount, Timestamp reimbSubmitted, Timestamp reimbResolved,
-			byte[] reimbReceipt, ErsUsers reimbAuthor, ErsUsers reimbResolver, ErsReimbursementStatus reimbStatusId,
-			ErsReimbursementType reimbTypeId) {
+							byte[] reimbReceipt, String reimbDescription, ErsUsers reimbAuthor, ErsUsers reimbResolver, ErsReimbursementStatus reimbStatusId,
+							ErsReimbursementType reimbTypeId) {
 		super();
 		this.reimbId = reimbId;
 		this.reimbAmount = reimbAmount;
 		this.reimbSubmitted = reimbSubmitted;
 		this.reimbResolved = reimbResolved;
 		this.reimbReceipt = reimbReceipt;
+		this.reimbDescription = reimbDescription;
 		this.reimbAuthor = reimbAuthor;
 		this.reimbResolver = reimbResolver;
 		this.reimbStatusId = reimbStatusId;
@@ -66,13 +67,14 @@ public class ErsReimbursement {
 	}
 
 	public ErsReimbursement(double reimbAmount, Timestamp reimbSubmitted, Timestamp reimbResolved,
-			byte[] reimbReceipt, ErsUsers reimbAuthor, ErsUsers reimbResolver, ErsReimbursementStatus reimbStatusId,
-			ErsReimbursementType reimbTypeId) {
+							byte[] reimbReceipt, String reimbDescription, ErsUsers reimbAuthor, ErsUsers reimbResolver, ErsReimbursementStatus reimbStatusId,
+							ErsReimbursementType reimbTypeId) {
 		super();
 		this.reimbAmount = reimbAmount;
 		this.reimbSubmitted = reimbSubmitted;
 		this.reimbResolved = reimbResolved;
 		this.reimbReceipt = reimbReceipt;
+		this.reimbDescription = reimbDescription;
 		this.reimbAuthor = reimbAuthor;
 		this.reimbResolver = reimbResolver;
 		this.reimbStatusId = reimbStatusId;
@@ -80,7 +82,6 @@ public class ErsReimbursement {
 	}
 
 	public ErsReimbursement() {
-		super();
 	}
 
 	public int getReimbId() {
@@ -155,6 +156,14 @@ public class ErsReimbursement {
 		this.reimbTypeId = reimbTypeId;
 	}
 
+	public String getReimbDescription() {
+		return reimbDescription;
+	}
+
+	public void setReimbDescription(String reimbDescription) {
+		this.reimbDescription = reimbDescription;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -221,5 +230,19 @@ public class ErsReimbursement {
 		return true;
 	}
 
-	
+	@Override
+	public String toString() {
+		return "ErsReimbursement{" +
+				"reimbId=" + reimbId +
+				", reimbAmount=" + reimbAmount +
+				", reimbSubmitted=" + reimbSubmitted +
+				", reimbResolved=" + reimbResolved +
+				", reimbReceipt=" + Arrays.toString(reimbReceipt) +
+				", reimbDescription='" + reimbDescription + '\'' +
+				", reimbAuthor=" + reimbAuthor +
+				", reimbResolver=" + reimbResolver +
+				", reimbStatusId=" + reimbStatusId +
+				", reimbTypeId=" + reimbTypeId +
+				'}';
+	}
 }

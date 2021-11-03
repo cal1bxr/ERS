@@ -195,22 +195,19 @@ function getNewReimb() {
                 newReimbType = REIMBTYPETRAVEL;
                 break;
             case 'OTHER':
-            newReimbType = REIMBTYPEOTHER;
+                newReimbType = REIMBTYPEOTHER;
                 break;
         }
 
     let reimb = {
 
         reimbAmount: newReimbAmount,
-
         reimbSubmitted: newReimbSubmitted,
-        
         reimbDescription: newReimbDescr,
         reimbReceipt: null,
         reimbAuthor : newAuthor,
         reimbStatusId : REIMBSTATUSPENDING,
         reimbTypeId : newReimbType
-        
     }
     return reimb;
 
@@ -224,6 +221,8 @@ async function getOneReimbursement(){
     if(response.status === 200){
         let data = await response.json();
         console.log(data);
+        populateReimbsTable(data);
+
         return data;
     } else {
         console.log("Soemthing went wrong");
@@ -283,10 +282,12 @@ async function getPastTickets(){
     console.log(reimbParsed);
     let tickets = reimbParsed.ersUsersId;
     console.log(tickets);
-    let response = await fetch(URL + `reimbs/${tickets}`, {credentials: "include"});
+    let response = await fetch(URL + `reimbs/${userId}`, {credentials: "include"});
     if (response.status === 200){
         let data = await response.json();
         console.log(data);
+        populateReimbsTable(data);
+
         return data;
     } else {
         console.log("No reimbursment exists");
@@ -299,54 +300,60 @@ async function getPastTickets(){
 
 
 async function approveDenyReimb(){
+    let reimb = getPastTickets();
+    console.log(reimb);
     let typedReimbId = document.getElementById("approveNumber").value;
     let resolvedBy = JSON.parse(sessionStorage.user);
     console.log(resolvedBy);
     let newReimbResolved = new Date();
+    let newReimbStatusId = REIMBSTATUSPENDING;
     // let selection = document.getElementById('appDenyReimbursment').onclick = function() {
     //     var e = document.getElementById("approvedDenyReimbursement");
     //     var value = e.options[e.selectedIndex].value;
     //     return value;
     // }
     let selection = document.getElementById("approvedDenyReimbursement").value;
-
-
-    if(selection.toUpperCase() == "APPROVED"){
-        newReimbStatusId = REIMBSTATUSAPPROVED;
-    } else if (selection.toUpperCase() == "DENIED"){
-        newReimbStatusId = REIMBSTATUSDENIED;
-    } else (
-        newReimbStatusId = REIMBSTATUSPENDING
-    )
-    
-
-    let reimb = {
-        // reimbId: typedReimbId,
-        reimbResolved: newReimbResolved,
-        reimbResolver: resolvedBy,
-        reimbStatusId: newReimbStatusId,
+    switch(selection.toUpperCase){
+        case 'APPROVED':
+             newReimbStatusId = REIMBSTATUSAPPROVED;
+            break;
+        case 'DENIED':
+            newReimbStatusId = REIMBSTATUSDENIED;
+            break;
     }
-    console.log(reimb);
-    let response = await fetch(URL + `reimbs/${typedReimbId}`, {credentials: "include"});
-        if(response.status === 200){
-            let data = await response.json();
-            console.log(data);
-                let response2 = await fetch(URL + `reimbs/${typedReimbId}`, {
-                    method: 'POST',
-                    body: JSON.stringify(reimb),
-                    credentials: "include"
-                 });
+
     
-                if(response2.status === 200){
-            
-                    console.log("Reimbursment update");
-                } else {
-                    console.log("No connection");
-                }
+    
+
+    // let reimb = {
+    //     reimbId: typedReimbId,
+    //     reimbResolved: newReimbResolved,
+    //     reimbResolver: resolvedBy,
+        
+    //     reimbStatusId: newReimbStatusId,
+       
+   
+    console.log(reimb);
+    let response = await fetch(URL + "reimbs/reimb", {
+        method: 'POST',
+        body: JSON.stringify(reimb),
+        credentials: "include"
+    });
+        if(response.status === 200){
+            console.log(reimb);
+            console.log("Reimbursment update");
         } else {
          console.log("Soemthing went wrong");
+         console.log(reimb);
         } 
-}
+        // console.log(data);
+        //     let response2 = await fetch(URL + "reimbs/reimb", {
+        //         method: 'POST',
+        //         body: JSON.stringify(reimb),
+        //         credentials: "include"
+        //         });
+
+    }
 
 /*------------------------------------------------Add Reimbursement Logic------------------------------------------------- */
 
@@ -365,6 +372,22 @@ async function addReimb() {
         console.log("User created successfully.");
     } else {
         console.log("Something went wrong creating your user.")
+    }
+}
+
+
+/*------------------------------------------- Filter By Status ---------------------------------*/
+
+async function getByStatus(){
+        let response = await fetch(URL + `reimbs/${statusId}`, {credentials:"include"});
+
+        if(response.status===200){
+            let data = await response.json();
+            // console.log(data);
+            populateReimbTable(data);
+            // return data;
+        } else {
+        console.log("Reimbursements not available");
     }
 }
 

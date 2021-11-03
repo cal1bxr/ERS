@@ -59,10 +59,10 @@ public class App {
 //		ErsUsers ersUser3 = new ErsUsers("test","test".hashCode(),"test","test","something@mjordan", ersUserRole2);
 //		ErsUsers ersUser4 = new ErsUsers("test2","whatever".hashCode(),"test2","test2","matt@mjordan", ersUserRole2);
 //
-//		ErsReimbursement ersReimb1 = new ErsReimbursement(100.00, ts, null, null, ersUser1, null, ersReimbursementStatus1, ersReimbursementType1);
-//		ErsReimbursement ersReimb2 = new ErsReimbursement(2100.00, ts, null, null, ersUser2, null, ersReimbursementStatus2, ersReimbursementType2);
-//		ErsReimbursement ersReimb3 = new ErsReimbursement(399.99, ts, ts, null, ersUser3, ersUser1, ersReimbursementStatus1, ersReimbursementType3);
-//		ErsReimbursement ersReimb4 = new ErsReimbursement(52.35, ts, null, null, ersUser4, null, ersReimbursementStatus3, ersReimbursementType4);
+//		ErsReimbursement ersReimb1 = new ErsReimbursement(100.00, ts, null, null,null, ersUser1, null, ersReimbursementStatus1, ersReimbursementType1);
+//		ErsReimbursement ersReimb2 = new ErsReimbursement(2100.00, ts, null, null, "Company Retreat", ersUser2, null, ersReimbursementStatus2, ersReimbursementType2);
+//		ErsReimbursement ersReimb3 = new ErsReimbursement(399.99, ts, ts, null, "Hotel", ersUser3, ersUser1, ersReimbursementStatus1, ersReimbursementType3);
+//		ErsReimbursement ersReimb4 = new ErsReimbursement(52.35, ts, null, null,null ,ersUser4, null, ersReimbursementStatus3, ersReimbursementType4);
 //
 //
 //		userDao.addUser(ersUser1);

@@ -14,16 +14,15 @@ public class ErsReimbursementService {
 	public List<ErsReimbursement> getAllTickets() {
 		return reimbDao.viewAllTickets();
 	}
-	
-	public List<ErsReimbursement> filterErsReimbursement(int status) {
-		List<ErsReimbursement> reimb = reimbDao.getReimbByStatus(status);
-		if (reimb != null) {
-			return reimb;
-		} else {
-			return null;
-		}
+
+	public List<ErsReimbursement> getReimbursementByStatus(int status) {
+		return reimbDao.getReimbByStatus(status);
 	}
-	
+
+	public List<ErsReimbursement> getReimbursementById(int id) {
+		return reimbDao.getReimbByStatus(id);
+	}
+
 	public List<ErsReimbursement> getPastTickets(int ersUsersId) {
 		List<ErsReimbursement> reimb = reimbDao.viewPastTickets(ersUsersId);
 		if (reimb != null) {
@@ -32,22 +31,14 @@ public class ErsReimbursementService {
 			return null;
 		}
 	}
-	
-	public ErsReimbursement getReimbursement(int id) {
-		ErsReimbursement reimb = reimbDao.findById(id);
-		if (reimb != null) {
-			return reimb;
-		} else {
-			return new ErsReimbursement();
-		}
-	}
 
 	public boolean addErsReimbursement(ErsReimbursement reimb) {
 		return reimbDao.addReimbursement(reimb);
 	}
-	
-	public boolean updateErsReimbursement(List<ErsReimbursement> reimb) {
+
+	public boolean updateErsReimbursement(ErsReimbursement reimb) {
 		return reimbDao.updateReimbursement(reimb);
 	}
-
 }
+
+

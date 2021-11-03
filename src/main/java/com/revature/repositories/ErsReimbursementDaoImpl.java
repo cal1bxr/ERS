@@ -38,11 +38,12 @@ public class ErsReimbursementDaoImpl implements ErsReimbursementDAO {
 	}
 
 	@Override
-	public List<ErsReimbursement> viewPastReimbursement(int ersUsersId) {
+	public List<ErsReimbursement> getReimbById(int id) {
 		Session session = HibernateUtil.getSession();
-		List<ErsReimbursement> list =  (List<ErsReimbursement>) session.get(ErsReimbursement.class, ersUsersId);
+		List<ErsReimbursement> list = session.createQuery("FROM ErsReimbursement WHERE reimbId = " + id).list();
+		List<ErsReimbursement> firstIndex = (List<ErsReimbursement>) list.get(0);
 		HibernateUtil.closeSession();
-		return list;
+		return firstIndex;
 	}
 
 	@Override
@@ -69,11 +70,11 @@ public class ErsReimbursementDaoImpl implements ErsReimbursementDAO {
 	}
 
 	@Override
-	public boolean updateReimbursement(List<ErsReimbursement> reimb) {
+	public boolean updateReimbursement(ErsReimbursement reimb) {
 		try {
 			Session session = HibernateUtil.getSession();
 			Transaction tx = session.beginTransaction();
-			session.saveOrUpdate(reimb);
+			session.update(reimb);
 			tx.commit();
 			HibernateUtil.closeSession();
 			return true;

@@ -9,8 +9,8 @@ public interface ErsReimbursementDAO {
 	List<ErsReimbursement> viewAllTickets();
 	List<ErsReimbursement> viewPastTickets(int ersUserId);
 	List<ErsReimbursement> getReimbByStatus(int status);
-	List<ErsReimbursement> viewPastReimbursement(int ersUsersId);
+	List<ErsReimbursement> getReimbById(int id);
 	ErsReimbursement findById(int reimbId);
     boolean addReimbursement(ErsReimbursement reimb);
-    boolean updateReimbursement(List<ErsReimbursement> reimb);
+    boolean updateReimbursement(ErsReimbursement reimb);
 }
