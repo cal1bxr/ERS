@@ -27,7 +27,7 @@ public class ReimbursementController implements Controller{
 		try {
 			String reimbursement = ctx.pathParam("ticket");
 			int id = Integer.parseInt(reimbursement);
-			List<ErsReimbursement> reimb = reimbService.getReimbursementById(id);
+			ErsReimbursement reimb = reimbService.getReimbursementById(id);
 			ctx.json(reimb);
 			ctx.status(200);			
 		}catch(NumberFormatException e){
@@ -97,10 +97,10 @@ public class ReimbursementController implements Controller{
 		// TODO Auto-generated method stub
 		app.get("reimbs", this.getAllReimbs);
 		app.get("/reimbs/:userId", this.getPastTickets);
-		app.get("/reimb/:ticket", this.getReimbTicket);
+		app.get("/reimbs/one/:ticket", this.getReimbTicket);
 		app.get("/reimb/:status", this.getReimbStatus);
 		app.post("/reimbs", this.addReimb);
-		app.post("/reimbs/reimb", this.updateReimb);
+		app.put("/reimbs/reimb", this.updateReimb);
 
 	}
 }

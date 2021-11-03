@@ -19,8 +19,8 @@ public class ErsReimbursementService {
 		return reimbDao.getReimbByStatus(status);
 	}
 
-	public List<ErsReimbursement> getReimbursementById(int id) {
-		return reimbDao.getReimbByStatus(id);
+	public ErsReimbursement getReimbursementById(int id) {
+		return reimbDao.getReimbById(id);
 	}
 
 	public List<ErsReimbursement> getPastTickets(int ersUsersId) {

@@ -3,15 +3,20 @@ const URL = "http://localhost:8081/";
 let buttonRow = document.getElementById("buttonRow");
 let addReimbButton = document.getElementById("addReimbButton");
 let loginButton = document.getElementById('loginButton');
-
+let pendingButton = document.getElementById('reimbViewButton');
+let userAddReimb = document.getElementById('addReimbButtonUser');
+let viewPastTicketsUser = document.getElementById('getPrevReimbursementsUser');
 
 
 let getUserButton = document.getElementById('getUserNameButton');
 let reimbursementButton = document.getElementById('getReimbursementNumber');
 let getReimbursementButton = document.getElementById('getReimbursementButton')
-let getPreviousTickets = document.getElementById('getprevReimbursements');
+let getPreviousTickets = document.getElementById('getPrevReimbursements');
+let rootDiv = document.getElementById('root');
+let rootDiv2 = document.getElementById('root2');
 
-
+let managerPage=document.getElementById("managerPage");
+let userPage=document.getElementById("userPage");
 
 
 let logoutButton = document.getElementById('logout');
@@ -20,8 +25,8 @@ let logoutButton = document.getElementById('logout');
 let submitReimbursementButton = document.getElementById('appDenyReimbursement');
 
 
-let reimbButton = document.createElement("button");
-let userButton = document.createElement("button");
+let reimbButton = document.createElement("reimbButton");
+let userButton = document.createElement("userButton");
 
 
 
@@ -33,6 +38,8 @@ getReimbursementButton.onclick = getOneReimbursement;
 submitReimbursementButton.onclick = approveDenyReimb;
 logoutButton.onclick = logout;
 getPreviousTickets.onclick = getPastTickets;
+userAddReimb.onclick = addReimbUser;
+viewPastTicketsUser.onclick = getPastTicketsUser
 
 
 reimbButton.innerText = "See All Reimbursements";
@@ -106,13 +113,15 @@ function setEnvironment(){
     let userParsed = JSON.parse(sessionStorage.getItem('user'));
     let userLogin = userParsed.ersUserRole.userRoleId;
         if(userLogin === 1){
-            document.getElementsByClassName("formClass")[0].innerHTML = "";
-            buttonRow.appendChild(reimbButton);
-            buttonRow.appendChild(userButton);
-            buttonRow.appendChild(addReimbButton);
+            document.getElementById("login").innerHTML = "";
+            rootDiv.appendChild(managerPage);
+            document.getElementById('managerPage').style.display='block';
+
         } else {
-            buttonRow.appendChild(getPreviousTickets);
-            buttonRow.appendChild(addReimbButton);
+            document.getElementById("login").innerHTML = "";
+            rootDiv2.appendChild(userPage);
+            document.getElementById('userPage').style.display='block';
+
         }
         
 
@@ -175,6 +184,42 @@ function populateReimbsTable(data) {
         tbody.appendChild(row);
     }
 }
+function populateOneReimbsTable(data) {
+    let tbody = document.getElementById("reimbursementBody");
+    
+    tbody.innerHTML = "";
+
+    
+        let row = document.createElement("tr");
+        let reimbs = data;
+        for (let cell in reimbs) {
+            let td = document.createElement("td");
+                td.innerText = reimbs[cell];
+                console.log(reimbs[cell]);
+                if((cell=="reimbAuthor") && reimbs[cell]){
+                    console.log(reimbs.reimbAuthor.ersUsername);
+                    td.innerText = `${reimbs.reimbAuthor.ersUsername}`;   
+                } else if(cell=="reimbResolver" && reimbs[cell]){
+                    if(cell=="reimbResolver" && reimbs[cell]){
+                    td.innerText = `${reimbs.reimbResolver.ersUsername}`;
+                    } else {
+                        td.innerText = 'null';
+                    }
+                } else if(cell=="reimbStatusId" && reimbs[cell]){ 
+                    td.innerText = `${reimbs[cell].reimbStatus}`;
+                }else if(cell=="reimbTypeId" && reimbs[cell]){
+                    td.innerText = `${reimbs[cell].reimbType}`;
+                }else if((cell=="reimbSubmitted"||cell=="reimbResolved") && reimbs[cell]){
+                    td.innerText = `${convertTimestamp(reimbs[cell])}`;
+                }else if(reimbs[cell]){
+                    td.innerText = `${reimbs[cell]}`;
+                }
+                  row.appendChild(td);
+            }
+            
+        tbody.appendChild(row);
+    
+}
 
 
 function getNewReimb() {
@@ -213,15 +258,53 @@ function getNewReimb() {
 
 }
 
+function getNewReimbUser() {
+    let newAuthor = JSON.parse(sessionStorage.user);  
+    
+    let newReimbAmount = document.getElementById("reimbursementAmountUser").value;
+    let newReimbSubmitted = new Date();
+    let newReimbDescr = document.getElementById("reimbursementDescriptionUser").value;
+    let typeChoice = document.getElementById("reimbursementTypeUser").value;
+        switch( typeChoice.toUpperCase()) {
+            case 'LODGING':
+                newReimbType = REIMBTYPELODGING;
+                break;
+            case 'FOOD':
+                newReimbType = REIMBTYPEFOOD;
+                break;
+            case 'TRAVEL':
+                newReimbType = REIMBTYPETRAVEL;
+                break;
+            case 'OTHER':
+                newReimbType = REIMBTYPEOTHER;
+                break;
+        }
+
+    let reimb = {
+
+        reimbAmount: newReimbAmount,
+        reimbSubmitted: newReimbSubmitted,
+        reimbDescription: newReimbDescr,
+        reimbReceipt: null,
+        reimbAuthor : newAuthor,
+        reimbStatusId : REIMBSTATUSPENDING,
+        reimbTypeId : newReimbType
+    }
+    return reimb;
+
+}
+
 async function getOneReimbursement(){
     let reimbId = document.getElementById("reimbursementNumber").value;
     console.log(reimbId);
     let ticket = reimbId;
-    let response = await fetch(URL + `reimbs/${ticket}`, {credentials: "include"});
+    let response = await fetch(URL + `reimbs/one/${ticket}`, {credentials: "include"});
     if(response.status === 200){
         let data = await response.json();
         console.log(data);
-        populateReimbsTable(data);
+        
+        populateOneReimbsTable(data);
+        sessionStorage.setItem('reimb', JSON.stringify(data));
 
         return data;
     } else {
@@ -282,11 +365,30 @@ async function getPastTickets(){
     console.log(reimbParsed);
     let tickets = reimbParsed.ersUsersId;
     console.log(tickets);
-    let response = await fetch(URL + `reimbs/${userId}`, {credentials: "include"});
+    let response = await fetch(URL + `reimbs/${tickets}`, {credentials: "include"});
     if (response.status === 200){
         let data = await response.json();
         console.log(data);
         populateReimbsTable(data);
+
+        return data;
+    } else {
+        console.log("No reimbursment exists");
+    }
+}
+
+async function getPastTicketsUser(){
+    reimb = sessionStorage.getItem('user');
+    reimbParsed = JSON.parse(reimb);
+    console.log(reimbParsed);
+    let tickets = reimbParsed.ersUsersId;
+    console.log(tickets);
+    let response = await fetch(URL + `reimbs/${tickets}`, {credentials: "include"});
+    if (response.status === 200){
+        let data = await response.json();
+        console.log(data);
+        populateReimbsTable(data);
+        
 
         return data;
     } else {
@@ -300,46 +402,44 @@ async function getPastTickets(){
 
 
 async function approveDenyReimb(){
-    let reimb = getPastTickets();
-    console.log(reimb);
-    let typedReimbId = document.getElementById("approveNumber").value;
+    let newReimb = JSON.parse(sessionStorage.getItem('reimb'));
+    let newReimbStatusId = null;
     let resolvedBy = JSON.parse(sessionStorage.user);
     console.log(resolvedBy);
-    let newReimbResolved = new Date();
-    let newReimbStatusId = REIMBSTATUSPENDING;
+ 
     // let selection = document.getElementById('appDenyReimbursment').onclick = function() {
     //     var e = document.getElementById("approvedDenyReimbursement");
     //     var value = e.options[e.selectedIndex].value;
     //     return value;
     // }
-    let selection = document.getElementById("approvedDenyReimbursement").value;
-    switch(selection.toUpperCase){
-        case 'APPROVED':
-             newReimbStatusId = REIMBSTATUSAPPROVED;
-            break;
-        case 'DENIED':
-            newReimbStatusId = REIMBSTATUSDENIED;
-            break;
+    let selection = document.getElementById("approvedDenyReimbursement").value.toUpperCase();
+    if(selection == "APPROVED"){
+        newReimbStatusId = REIMBSTATUSAPPROVED;
+    } else if (selection == "DENIED"){
+        newReimbStatusId = REIMBSTATUSDENIED;
+    } else if (selection == "PENDING"){
+        newReimbStatusId === REIMBSTATUSPENDING;
     }
 
-    
-    
-
-    // let reimb = {
-    //     reimbId: typedReimbId,
-    //     reimbResolved: newReimbResolved,
-    //     reimbResolver: resolvedBy,
-        
-    //     reimbStatusId: newReimbStatusId,
-       
+    let reimb = {
+        reimbId: newReimb.reimbId,
+        reimbAmount: newReimb.reimbAmount,
+        reimbAuthor: newReimb.reimbAuthor,
+        reimbSubmitted: newReimb.reimbSubmitted,
+        reimbDescription: newReimb.reimbDescription,
+        reimbResolved: new Date(),
+        reimbResolver: resolvedBy,
+        reimbTypeId: newReimb.reimbTypeId,
+        reimbStatusId: newReimbStatusId,
+    }
    
     console.log(reimb);
     let response = await fetch(URL + "reimbs/reimb", {
-        method: 'POST',
+        method: 'PUT',
         body: JSON.stringify(reimb),
         credentials: "include"
     });
-        if(response.status === 200){
+        if(response.status === 201){
             console.log(reimb);
             console.log("Reimbursment update");
         } else {
@@ -371,7 +471,24 @@ async function addReimb() {
     if (response.status === 201) {
         console.log("User created successfully.");
     } else {
-        console.log("Something went wrong creating your user.")
+        console.log("Something went wrong creating your reimbursment.")
+    }
+}
+
+async function addReimbUser() {
+    let reimb = getNewReimbUser();
+    console.log(reimb);
+
+    let response = await fetch(URL + "reimbs", {
+        method: 'POST',
+        body: JSON.stringify(reimb),
+        credentials: "include"
+    });
+
+    if (response.status === 201) {
+        console.log("User created successfully.");
+    } else {
+        console.log("Something went wrong creating your reimbursement.")
     }
 }
 

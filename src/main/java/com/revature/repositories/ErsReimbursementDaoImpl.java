@@ -2,7 +2,9 @@ package com.revature.repositories;
 
 import java.util.List;
 
+import com.revature.models.ErsUsers;
 import org.hibernate.HibernateException;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
@@ -38,12 +40,15 @@ public class ErsReimbursementDaoImpl implements ErsReimbursementDAO {
 	}
 
 	@Override
-	public List<ErsReimbursement> getReimbById(int id) {
+	public ErsReimbursement getReimbById(int id) {
 		Session session = HibernateUtil.getSession();
-		List<ErsReimbursement> list = session.createQuery("FROM ErsReimbursement WHERE reimbId = " + id).list();
-		List<ErsReimbursement> firstIndex = (List<ErsReimbursement>) list.get(0);
+		Query q = session.createQuery("FROM ErsReimbursement WHERE reimbId = :id");
+		q.setParameter("id", id);
+		List<ErsReimbursement> list = q.list();
+		ErsReimbursement reimb = list.get(0);
 		HibernateUtil.closeSession();
-		return firstIndex;
+		return reimb;
+
 	}
 
 	@Override
@@ -74,7 +79,7 @@ public class ErsReimbursementDaoImpl implements ErsReimbursementDAO {
 		try {
 			Session session = HibernateUtil.getSession();
 			Transaction tx = session.beginTransaction();
-			session.update(reimb);
+			session.merge(reimb);
 			tx.commit();
 			HibernateUtil.closeSession();
 			return true;
