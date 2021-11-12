@@ -38,12 +38,12 @@ The Expense Reimbursement System (ERS) will manage the process of reimbursing em
 
 **Run the Main class as a java application**  
 
-**Run the PostgreSQL script in a database instance**  
-
-**Head to a browser and navigate to http://localhost:8081/proj1.html**  
+**Navigate to localhost:8081/index.html**
 
 
 ## Usage
+
+
 
 
 **State-chart Diagram (Reimbursement Statuses)** 
