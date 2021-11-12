@@ -36,6 +36,8 @@ The Expense Reimbursement System (ERS) will manage the process of reimbursing em
 
 **Select the folder into which you cloned the repository**  
 
+**Create schema in database called ers_reimbursement**
+
 **Run the Main class as a java application**  
 
 **Navigate to localhost:8081/index.html**
@@ -43,7 +45,8 @@ The Expense Reimbursement System (ERS) will manage the process of reimbursing em
 
 ## Usage
 
-
+Login into app using accounts listed in database, or create account in database for login.
+Once logged in use text fields to enter information based on info listed in model diagrams below.
 
 
 **State-chart Diagram (Reimbursement Statuses)** 
