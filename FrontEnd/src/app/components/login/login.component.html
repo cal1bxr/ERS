@@ -1,0 +1,9 @@
+<div class="container">
+    <div class="hero">
+        <form [formGroup]="loginForm">
+            <input type="text" id="userName" formControlName="loginName" placeholder="Enter User Name" #userName>
+            <input type="password" id="password" formControlName="loginPassword" placeholder="Enter Password" #password>
+        </form>
+        <app-button (btnClick)="onSubmit(userName.value, password.value)" text="Log In"></app-button>
+    </div>
+</div>
