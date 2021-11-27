@@ -7,14 +7,14 @@
     <tr *ngFor = "let row of data">
         <td>{{row.reimbId}}</td>
         <td>{{row.reimbAmount}}</td>
-        <td>{{row.reimbSubmitted}}</td>
-        <td>{{row.reimbResolved}}</td>
+        <td>{{row.reimbSubmitted | date: 'dd-mm-yyyy'}}</td>
+        <td>{{row.reimbResolved | date: 'dd-mm-yyyy'}}</td>
         <td>{{row.reimbReceipt}}</td>
         <td>{{row.reimbDescription}}</td>
-        <td>{{row.reimbAuthor}}</td>
-        <td>{{row.reimbResolver}}</td>
-        <td>{{row['reimbStatusId']}}</td>
-        <td>{{row.reimbTypeId}}</td>
+        <td>{{row.reimbAuthor.ersFirstName}} {{row.reimbAuthor.ersLastName}}</td>
+        <td>{{row.reimbResolver}} </td>
+        <td>{{row.reimbStatusId.reimbStatus}}</td>
+        <td>{{row.reimbTypeId.reimbType}}</td>
 
     </tr>
 </table>

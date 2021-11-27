@@ -1,6 +1,5 @@
-export class ReimbStatus {
-    constructor(
+export interface ReimbStatus {
         reimbStatId: number,
         reimbStatus: string
-    ){}
+
 }

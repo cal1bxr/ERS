@@ -1,13 +1,11 @@
 import { UserRoles } from "./userroles";
 
-export class ErsUser {
-   constructor(
+export interface ErsUser {
     userId: number,
-    userName: string,
-    password: number,
-    firstName: string,
-    lastName: string,
-    email: string,
-    userRole: UserRoles
-    ){}
+    ersUserName: string,
+    ersPassword: number,
+    ersFirstName: string,
+    ersLastName: string,
+    ersEmail: string,
+    ersUserRole: UserRoles
 }

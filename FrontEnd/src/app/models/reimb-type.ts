@@ -1,6 +1,4 @@
-export class ReimbType {
-    constructor(
+export interface ReimbType {
         reimbTypeId: number,
         reimbType: string
-    ){}
 }

@@ -1,6 +1,4 @@
-export class UserRoles {
-    constructor(
+export interface UserRoles {
         roleId: number,
         role: string
-    ){}
 }

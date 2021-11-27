@@ -1,3 +1,4 @@
+import { convertPropertyBindingBuiltins } from '@angular/compiler/src/compiler_util/expression_converter';
 import { Component, OnInit } from '@angular/core';
 import { Reimb } from 'src/app/models/reimb';
 import { ReimbsService } from 'src/app/services/reimbs.service';
@@ -25,6 +26,7 @@ export class ReimbsComponent implements OnInit {
         this.data = response;
         console.log(this.data);
         this.cols=Object.keys(response[0]);
+        console.log(this.data[0].reimbStatusId);
       }
     },
     err=>{console.log(err);},
