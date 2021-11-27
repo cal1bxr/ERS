@@ -10,6 +10,7 @@ import { LoginComponent } from './components/login/login.component';
 import { ButtonComponent } from './components/button/button.component';
 import { ReimbsComponent } from './components/reimbs/reimbs.component';
 import { UserComponent } from './components/user/user.component';
+import { TableComponent } from './components/table/table.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { UserComponent } from './components/user/user.component';
     LoginComponent,
     ButtonComponent,
     ReimbsComponent,
-    UserComponent
+    UserComponent,
+    TableComponent
   ],
   imports: [
     BrowserModule,

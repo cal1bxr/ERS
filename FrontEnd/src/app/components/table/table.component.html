@@ -1,0 +1,21 @@
+<table>
+    <tr>
+        <th *ngFor = "let column of cols">
+            {{column | uppercase}}
+        </th>
+     </tr>
+    <tr *ngFor = "let row of data">
+        <td>{{row.reimbId}}</td>
+        <td>{{row.reimbAmount}}</td>
+        <td>{{row.reimbSubmitted}}</td>
+        <td>{{row.reimbResolved}}</td>
+        <td>{{row.reimbReceipt}}</td>
+        <td>{{row.reimbDescription}}</td>
+        <td>{{row.reimbAuthor}}</td>
+        <td>{{row.reimbResolver}}</td>
+        <td>{{row['reimbStatusId']}}</td>
+        <td>{{row.reimbTypeId}}</td>
+
+    </tr>
+</table>
+
